@@ -37,11 +37,31 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     }
 
     @Override
+    public void startActivityForResult(Intent intent, int requestCode) {
+        super.startActivityForResult(intent, requestCode);
+        overridePendingTransition(R.anim.slide_left_out, R.anim.slide_left_in);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.slide_right_out, R.anim.slide_right_in);
+    }
+
+    @Override
     public void onNavigationDrawerItemSelected(int position) {
         Intent intent = null;
         switch (position) {
+            case 0:
+                intent = new Intent(this, LeaderboardsActivity.class);
+                break;
+            case 1:
+                intent = new Intent(this, MyStatsActivity.class);
+                break;
+            case 2:
+                intent = new Intent(this, SettingsActivity.class);
+                break;
         }
-        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
         startActivity(intent);
     }
 
