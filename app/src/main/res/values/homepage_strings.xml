@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Math Race</string>
+    <string name="history">History</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="leaderboards">Leaderboards</string>
+    <string name="my_stats">My Stats</string>
+    <string name="settings">Settings</string>
+    <string-array name="nav_drawer_tabs">
+        <item>@string/leaderboards</item>
+        <item>@string/my_stats</item>
+        <item>@string/settings</item>
+    </string-array>
+
+    <!-- Font Awesome icons -->
+    <string name="trophy_icon">{fa-trophy}</string>
+    <string name="stats_icon">{fa-pie-chart}</string>
+    <string name="settings_icon">{fa-gear}</string>
+    <string-array name="nav_drawer_icons">
+        <item>@string/trophy_icon</item>
+        <item>@string/stats_icon</item>
+        <item>@string/settings_icon</item>
+    </string-array>
+</resources>
