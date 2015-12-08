@@ -13,5 +13,5 @@ import retrofit.http.Path;
  */
 public interface MathRaceService {
     @GET("/getStories/{mode}/{runId}")
-    Call<List<RunStory>> listRepos(@Path("mode") String mode, @Path("runId") String runId);
+    Call<List<RunStory>> getStories(@Path("mode") String mode, @Path("runId") String runId);
 }
