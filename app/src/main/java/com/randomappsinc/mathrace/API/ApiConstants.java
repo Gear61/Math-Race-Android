@@ -9,6 +9,7 @@ public class ApiConstants {
     public static final String NEWEST = "newest";
     public static final String BEFORE = "before";
     public static final String AFTER = "after";
+    public static final int EXPECTED_NUM_STORIES = 40;
 
     public static final int HTTP_STATUS_OK = 200;
 }

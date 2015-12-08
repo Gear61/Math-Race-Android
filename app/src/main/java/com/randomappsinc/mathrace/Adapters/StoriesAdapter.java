@@ -34,6 +34,20 @@ public class StoriesAdapter extends BaseAdapter {
         this.xIcon = context.getString(R.string.x_icon);
     }
 
+    public void prependStories(List<RunStory> newStories) {
+        for (RunStory story : newStories) {
+            stories.add(0, story);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void appendStories(List<RunStory> oldStories) {
+        for (RunStory story : oldStories) {
+            stories.add(story);
+        }
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return stories.size();

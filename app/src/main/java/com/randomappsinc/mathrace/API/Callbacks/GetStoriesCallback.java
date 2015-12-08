@@ -27,12 +27,12 @@ public class GetStoriesCallback implements Callback<List<RunStory>> {
             EventBus.getDefault().post(new StoriesEvent(mode, response.body()));
         }
         else {
-            EventBus.getDefault().post(new StoriesEvent("", null));
+            EventBus.getDefault().post(new StoriesEvent(mode, null));
         }
     }
 
     @Override
     public void onFailure(Throwable t) {
-        EventBus.getDefault().post(new StoriesEvent("", null));
+        EventBus.getDefault().post(new StoriesEvent(mode, null));
     }
 }
