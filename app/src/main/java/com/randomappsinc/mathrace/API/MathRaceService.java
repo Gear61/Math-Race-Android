@@ -1,5 +1,6 @@
 package com.randomappsinc.mathrace.API;
 
+import com.randomappsinc.mathrace.API.Models.LeadingRun;
 import com.randomappsinc.mathrace.API.Models.RunStory;
 
 import java.util.List;
@@ -14,4 +15,7 @@ import retrofit.http.Path;
 public interface MathRaceService {
     @GET("/getStories/{mode}/{runId}")
     Call<List<RunStory>> getStories(@Path("mode") String mode, @Path("runId") String runId);
+
+    @GET("/leaderboard/{runType}")
+    Call<List<LeadingRun>> getLeaderboard(@Path("runType") String runType);
 }
