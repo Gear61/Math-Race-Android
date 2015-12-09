@@ -22,4 +22,11 @@
         <item>@string/stats_icon</item>
         <item>@string/settings_icon</item>
     </string-array>
+
+    <string name="addition">Addition</string>
+    <string name="subtraction">Subtraction</string>
+    <string-array name="run_types">
+        <item>@string/addition</item>
+        <item>@string/subtraction</item>
+    </string-array>
 </resources>
