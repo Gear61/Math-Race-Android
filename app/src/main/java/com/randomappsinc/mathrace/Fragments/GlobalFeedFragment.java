@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import com.randomappsinc.mathrace.API.ApiConstants;
@@ -23,13 +24,15 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by alexanderchiou on 12/5/15.
  */
-public class GlobalFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class GlobalFeedFragment extends Fragment
+        implements SwipeRefreshLayout.OnRefreshListener, ListView.OnScrollListener {
     @Bind(R.id.loading_stories) View loadingStories;
     @Bind(R.id.stories) ListView stories;
     @Bind(R.id.parent) View parent;
     @Bind(R.id.fetch_new_stories) SwipeRefreshLayout fetchNewStories;
 
     private StoriesAdapter storiesAdapter;
+    private int lastIndexToTrigger;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,9 +44,11 @@ public class GlobalFeedFragment extends Fragment implements SwipeRefreshLayout.O
         View rootView = inflater.inflate(R.layout.feed, container, false);
         ButterKnife.bind(this, rootView);
         EventBus.getDefault().register(this);
+        lastIndexToTrigger = 0;
 
         storiesAdapter = new StoriesAdapter(getActivity());
         stories.setAdapter(storiesAdapter);
+        stories.setOnScrollListener(this);
         fetchNewStories.setColorSchemeResources(R.color.red, R.color.yellow, R.color.green, R.color.app_blue);
         fetchNewStories.setOnRefreshListener(this);
 
@@ -56,7 +61,9 @@ public class GlobalFeedFragment extends Fragment implements SwipeRefreshLayout.O
     @Override
     public void onResume() {
         super.onResume();
-        fetchNewStories(true);
+        if (storiesAdapter.getCount() != 0) {
+            fetchNewStories(true);
+        }
     }
 
     public void onEvent(StoriesEvent event) {
@@ -90,6 +97,24 @@ public class GlobalFeedFragment extends Fragment implements SwipeRefreshLayout.O
         GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.AFTER);
         RestClient.getInstance().getMathRaceService().getStories(ApiConstants.AFTER,
                 String.valueOf(storiesAdapter.getNewestStoryId())).enqueue(callback);
+    }
+
+    @Override
+    public void onScrollStateChanged(AbsListView view, int scrollState) {}
+
+    @Override
+    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        final int bottomIndexSeen = firstVisibleItem + visibleItemCount;
+
+        // If visible last item's position is the size of the list, then we've hit the bottom
+        if (storiesAdapter.getExtraItem() == 1 && bottomIndexSeen == totalItemCount) {
+            if (lastIndexToTrigger != bottomIndexSeen) {
+                lastIndexToTrigger = bottomIndexSeen;
+                GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.BEFORE);
+                RestClient.getInstance().getMathRaceService().getStories(ApiConstants.BEFORE,
+                        String.valueOf(storiesAdapter.getOldestStoryId())).enqueue(callback);
+            }
+        }
     }
 
     @Override

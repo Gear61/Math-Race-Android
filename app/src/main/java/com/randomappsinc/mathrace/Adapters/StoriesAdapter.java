@@ -32,6 +32,10 @@ public class StoriesAdapter extends BaseAdapter {
         this.extraItem = 0;
     }
 
+    public int getExtraItem() {
+        return extraItem;
+    }
+
     public void prependStories(List<RunStory> newStories) {
         for (RunStory story : newStories) {
             stories.add(0, story);
@@ -61,7 +65,7 @@ public class StoriesAdapter extends BaseAdapter {
 
     public int getOldestStoryId() {
         if (!stories.isEmpty()) {
-            return getItem(getCount() - 1).getId();
+            return getItem(stories.size() - 1).getId();
         }
         return 0;
     }
