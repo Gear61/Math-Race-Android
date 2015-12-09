@@ -2,6 +2,7 @@ package com.randomappsinc.mathrace.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,11 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by alexanderchiou on 12/5/15.
  */
-public class GlobalFeedFragment extends Fragment {
+public class GlobalFeedFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     @Bind(R.id.loading_stories) View loadingStories;
     @Bind(R.id.stories) ListView stories;
     @Bind(R.id.parent) View parent;
+    @Bind(R.id.fetch_new_stories) SwipeRefreshLayout fetchNewStories;
 
     private StoriesAdapter storiesAdapter;
 
@@ -42,6 +44,8 @@ public class GlobalFeedFragment extends Fragment {
 
         storiesAdapter = new StoriesAdapter(getActivity());
         stories.setAdapter(storiesAdapter);
+        fetchNewStories.setColorSchemeResources(R.color.red, R.color.yellow, R.color.green, R.color.app_blue);
+        fetchNewStories.setOnRefreshListener(this);
 
         GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.NEWEST);
         RestClient.getInstance().getMathRaceService().getStories(ApiConstants.NEWEST, "0").enqueue(callback);
@@ -50,14 +54,15 @@ public class GlobalFeedFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        EventBus.getDefault().unregister(this);
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+    public void onResume() {
+        super.onResume();
+        fetchNewStories(true);
     }
 
     public void onEvent(StoriesEvent event) {
         loadingStories.setVisibility(View.GONE);
+        fetchNewStories.setVisibility(View.VISIBLE);
+        fetchNewStories.setRefreshing(false);
         if (event.getStories() != null) {
             switch (event.getMode()) {
                 case ApiConstants.NEWEST:
@@ -71,5 +76,26 @@ public class GlobalFeedFragment extends Fragment {
         else {
             FormUtils.showSnackbar(parent, getString(R.string.fetch_stories_fail));
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        fetchNewStories(false);
+    }
+
+    public void fetchNewStories(boolean automatic) {
+        if (automatic) {
+            fetchNewStories.setRefreshing(true);
+        }
+        GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.AFTER);
+        RestClient.getInstance().getMathRaceService().getStories(ApiConstants.AFTER,
+                String.valueOf(storiesAdapter.getNewestStoryId())).enqueue(callback);
+    }
+
+    @Override
+    public void onDestroyView() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 }

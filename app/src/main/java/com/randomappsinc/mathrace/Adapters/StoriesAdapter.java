@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.joanzapata.iconify.widget.IconTextView;
 import com.randomappsinc.mathrace.API.Models.RunStory;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.FeedUtils;
@@ -42,6 +41,20 @@ public class StoriesAdapter extends BaseAdapter {
             stories.add(story);
         }
         notifyDataSetChanged();
+    }
+
+    public int getNewestStoryId() {
+        if (!stories.isEmpty()) {
+            return getItem(0).getId();
+        }
+        return 0;
+    }
+
+    public int getOldestStoryId() {
+        if (!stories.isEmpty()) {
+            return getItem(getCount() - 1).getId();
+        }
+        return 0;
     }
 
     @Override

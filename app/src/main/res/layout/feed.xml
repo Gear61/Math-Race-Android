@@ -21,10 +21,17 @@
             app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
             app:pv_progressMode="indeterminate"/>
 
-        <ListView
-            android:id="@+id/stories"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/fetch_new_stories"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </ListView>
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ListView
+                android:id="@+id/stories"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
