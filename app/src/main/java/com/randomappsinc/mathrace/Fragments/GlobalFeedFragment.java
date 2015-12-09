@@ -30,6 +30,7 @@ public class GlobalFeedFragment extends Fragment
     @Bind(R.id.stories) ListView stories;
     @Bind(R.id.parent) View parent;
     @Bind(R.id.fetch_new_stories) SwipeRefreshLayout fetchNewStories;
+    @Bind(R.id.no_stories) View noStories;
 
     private StoriesAdapter storiesAdapter;
     private int lastIndexToTrigger;
@@ -51,11 +52,14 @@ public class GlobalFeedFragment extends Fragment
         stories.setOnScrollListener(this);
         fetchNewStories.setColorSchemeResources(R.color.red, R.color.yellow, R.color.green, R.color.app_blue);
         fetchNewStories.setOnRefreshListener(this);
-
-        GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.NEWEST);
-        RestClient.getInstance().getMathRaceService().getStories(ApiConstants.NEWEST, "0").enqueue(callback);
+        fetchNewestStories();
 
         return rootView;
+    }
+
+    public void fetchNewestStories() {
+        GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.NEWEST);
+        RestClient.getInstance().getMathRaceService().getStories(ApiConstants.NEWEST, "0").enqueue(callback);
     }
 
     @Override
@@ -67,8 +71,17 @@ public class GlobalFeedFragment extends Fragment
     }
 
     public void onEvent(StoriesEvent event) {
-        loadingStories.setVisibility(View.GONE);
-        fetchNewStories.setVisibility(View.VISIBLE);
+        if (event.getMode().equals(ApiConstants.NEWEST)) {
+            loadingStories.setVisibility(View.GONE);
+            fetchNewStories.setVisibility(View.VISIBLE);
+
+            if (event.getStories() == null || event.getStories().isEmpty()) {
+                noStories.setVisibility(View.VISIBLE);
+            }
+            else {
+                noStories.setVisibility(View.GONE);
+            }
+        }
         fetchNewStories.setRefreshing(false);
         if (event.getStories() != null) {
             switch (event.getMode()) {
@@ -87,7 +100,12 @@ public class GlobalFeedFragment extends Fragment
 
     @Override
     public void onRefresh() {
-        fetchNewStories(false);
+        if (storiesAdapter.getCount() == 0) {
+            fetchNewestStories();
+        }
+        else {
+            fetchNewStories(false);
+        }
     }
 
     public void fetchNewStories(boolean automatic) {

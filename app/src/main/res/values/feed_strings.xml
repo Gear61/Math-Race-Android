@@ -2,5 +2,6 @@
 <resources>
     <string name="check_icon">{fa-check}</string>
     <string name="x_icon">{fa-remove}</string>
+    <string name="no_stories_to_display">No stories to display.</string>
     <string name="fetch_stories_fail">We failed to fetch stories for you at this time. Please try again later.</string>
 </resources>
