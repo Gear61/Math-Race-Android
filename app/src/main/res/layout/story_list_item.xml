@@ -1,41 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:padding="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <TextView
-            style="@style/story_data"
-            android:id="@+id/user_tag"
-            android:textColor="@color/black"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1">
 
-        <TextView
-            style="@style/story_data"
-            android:id="@+id/run_type"
-            android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/user_tag"
+                style="@style/feed_text"/>
 
-        <com.joanzapata.iconify.widget.IconTextView
-            style="@style/story_data"
-            android:id="@+id/num_correct"
-            android:textColor="@color/green"/>
+            <TextView
+                android:id="@+id/run_type"
+                style="@style/feed_text"/>
+        </LinearLayout>
 
-        <com.joanzapata.iconify.widget.IconTextView
-            style="@style/story_data"
-            android:id="@+id/num_wrong"
-            android:textColor="@color/red"/>
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:text="@string/check_icon"
+                android:textColor="@color/green"
+                style="@style/feed_icon"/>
+
+            <TextView
+                android:id="@+id/num_correct"
+                android:textColor="@color/green"
+                style="@style/feed_right_wrong"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <com.joanzapata.iconify.widget.IconTextView
+                android:text="@string/x_icon"
+                android:textColor="@color/red"
+                style="@style/feed_icon"/>
+
+            <TextView
+                android:id="@+id/num_wrong"
+                android:textColor="@color/red"
+                style="@style/feed_right_wrong"/>
+        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/timestamp"
-        android:padding="5dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginBottom="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:layout_gravity="end"/>
-</LinearLayout>
+        android:textSize="14dp"
+        android:layout_gravity="bottom|end"/>
+</FrameLayout>

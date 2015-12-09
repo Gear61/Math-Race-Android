@@ -24,14 +24,10 @@ import butterknife.ButterKnife;
 public class StoriesAdapter extends BaseAdapter {
     private Context context;
     private List<RunStory> stories;
-    private String checkIcon;
-    private String xIcon;
 
     public StoriesAdapter(Context context) {
         this.context = context;
         this.stories = new ArrayList<>();
-        this.checkIcon = context.getString(R.string.check_icon);
-        this.xIcon = context.getString(R.string.x_icon);
     }
 
     public void prependStories(List<RunStory> newStories) {
@@ -66,8 +62,8 @@ public class StoriesAdapter extends BaseAdapter {
     public class StoryViewHolder {
         @Bind(R.id.user_tag) TextView userTag;
         @Bind(R.id.run_type) TextView runType;
-        @Bind(R.id.num_correct) IconTextView numCorrect;
-        @Bind(R.id.num_wrong) IconTextView numWrong;
+        @Bind(R.id.num_correct) TextView numCorrect;
+        @Bind(R.id.num_wrong) TextView numWrong;
         @Bind(R.id.timestamp) TextView timestamp;
 
         public StoryViewHolder(View view) {
@@ -90,10 +86,8 @@ public class StoriesAdapter extends BaseAdapter {
 
         holder.userTag.setText(getItem(position).getUserTag());
         holder.runType.setText(getItem(position).getRunType());
-        String numCorrect = checkIcon + String.valueOf(getItem(position).getNumCorrect());
-        holder.numCorrect.setText(numCorrect);
-        String numIncorrect = xIcon + String.valueOf(getItem(position).getNumWrong());
-        holder.numWrong.setText(numIncorrect);
+        holder.numCorrect.setText(String.valueOf(getItem(position).getNumCorrect()));
+        holder.numWrong.setText(String.valueOf(getItem(position).getNumWrong()));
         holder.timestamp.setText(FeedUtils.humanizeUnixTime(getItem(position).getTimeOccurred()));
 
         return view;

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="check_icon">{fa-check}&#160;</string>
-    <string name="x_icon">{fa-remove}&#160;</string>
+    <string name="check_icon">{fa-check}</string>
+    <string name="x_icon">{fa-remove}</string>
     <string name="fetch_stories_fail">We failed to fetch stories for you at this time. Please try again later.</string>
 </resources>
