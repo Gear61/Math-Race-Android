@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Models.RunStory;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.FeedUtils;
@@ -23,10 +24,12 @@ import butterknife.ButterKnife;
 public class StoriesAdapter extends BaseAdapter {
     private Context context;
     private List<RunStory> stories;
+    private int extraItem;
 
     public StoriesAdapter(Context context) {
         this.context = context;
         this.stories = new ArrayList<>();
+        this.extraItem = 0;
     }
 
     public void prependStories(List<RunStory> newStories) {
@@ -37,6 +40,12 @@ public class StoriesAdapter extends BaseAdapter {
     }
 
     public void appendStories(List<RunStory> oldStories) {
+        if (oldStories.size() < ApiConstants.EXPECTED_NUM_STORIES) {
+            extraItem = 0;
+        }
+        else {
+            extraItem = 1;
+        }
         for (RunStory story : oldStories) {
             stories.add(story);
         }
@@ -59,7 +68,7 @@ public class StoriesAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return stories.size();
+        return stories.size() + extraItem;
     }
 
     @Override
@@ -73,11 +82,13 @@ public class StoriesAdapter extends BaseAdapter {
     }
 
     public class StoryViewHolder {
+        @Bind(R.id.run_data) View runData;
         @Bind(R.id.user_tag) TextView userTag;
         @Bind(R.id.run_type) TextView runType;
         @Bind(R.id.num_correct) TextView numCorrect;
         @Bind(R.id.num_wrong) TextView numWrong;
         @Bind(R.id.timestamp) TextView timestamp;
+        @Bind(R.id.loading_stories) View loadingStories;
 
         public StoryViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -89,7 +100,7 @@ public class StoriesAdapter extends BaseAdapter {
         StoryViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = vi.inflate(R.layout.story_list_item, parent, false);
+            view = vi.inflate(R.layout.story_cell, parent, false);
             holder = new StoryViewHolder(view);
             view.setTag(holder);
         }
@@ -97,11 +108,22 @@ public class StoriesAdapter extends BaseAdapter {
             holder = (StoryViewHolder) view.getTag();
         }
 
-        holder.userTag.setText(getItem(position).getUserTag());
-        holder.runType.setText(getItem(position).getRunType());
-        holder.numCorrect.setText(String.valueOf(getItem(position).getNumCorrect()));
-        holder.numWrong.setText(String.valueOf(getItem(position).getNumWrong()));
-        holder.timestamp.setText(FeedUtils.humanizeUnixTime(getItem(position).getTimeOccurred()));
+        if (extraItem == 1 && position == getCount() - 1) {
+            holder.runData.setVisibility(View.GONE);
+            holder.timestamp.setVisibility(View.GONE);
+            holder.loadingStories.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.loadingStories.setVisibility(View.GONE);
+            holder.runData.setVisibility(View.VISIBLE);
+            holder.timestamp.setVisibility(View.VISIBLE);
+
+            holder.userTag.setText(getItem(position).getUserTag());
+            holder.runType.setText(getItem(position).getRunType());
+            holder.numCorrect.setText(String.valueOf(getItem(position).getNumCorrect()));
+            holder.numWrong.setText(String.valueOf(getItem(position).getNumWrong()));
+            holder.timestamp.setText(FeedUtils.humanizeUnixTime(getItem(position).getTimeOccurred()));
+        }
 
         return view;
     }
