@@ -2,6 +2,7 @@ package com.randomappsinc.mathrace.Adapters;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.os.Bundle;
 
 import com.randomappsinc.mathrace.Fragments.LeaderboardFragment;
 import com.randomappsinc.mathrace.R;
@@ -21,7 +22,11 @@ public class LeaderboardTabsAdapter extends android.support.v13.app.FragmentStat
 
     @Override
     public Fragment getItem(int position) {
-        return new LeaderboardFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(LeaderboardFragment.RUN_TYPE_KEY, runTypes[position]);
+        LeaderboardFragment leaderboardFragment = new LeaderboardFragment();
+        leaderboardFragment.setArguments(bundle);
+        return leaderboardFragment;
     }
 
     @Override

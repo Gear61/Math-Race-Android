@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="leaderboard_error">We are unable to fetch this leaderboard at this time. Please try again later.</string>
+</resources>
