@@ -48,6 +48,7 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
 
         leaderboardAdapter = new LeaderboardAdapter(getActivity());
         leaderboard.setAdapter(leaderboardAdapter);
+        leaderboard.setDivider(null);
         updateLeaderboard.setColorSchemeResources(R.color.red, R.color.yellow, R.color.green, R.color.app_blue);
         updateLeaderboard.setOnRefreshListener(this);
 
