@@ -35,8 +35,9 @@
                 <TextView
                     android:id="@+id/placing"
                     android:gravity="center"
+                    android:textColor="@color/dark_gray"
                     android:textSize="32dp"
-                    android:background="@drawable/circular_border"
+                    android:background="@drawable/circular_border_regular"
                     android:layout_width="50dp"
                     android:layout_height="50dp" />
             </LinearLayout>

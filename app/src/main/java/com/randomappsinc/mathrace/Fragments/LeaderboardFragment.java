@@ -29,6 +29,7 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
     @Bind(R.id.loading_leaderboard) View loadingLeaderboard;
     @Bind(R.id.update_leaderboard) SwipeRefreshLayout updateLeaderboard;
     @Bind(R.id.leaderboard) ListView leaderboard;
+    @Bind(R.id.no_leaderboard) View noLeaderboard;
 
     private String runType;
     private LeaderboardAdapter leaderboardAdapter;
@@ -73,12 +74,18 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
             updateLeaderboard.setVisibility(View.VISIBLE);
             updateLeaderboard.setRefreshing(false);
             if (event.getLeadingRuns() != null) {
-                leaderboardAdapter.setLeaderboard(event.getLeadingRuns());
+                if (!event.getLeadingRuns().isEmpty()) {
+                    noLeaderboard.setVisibility(View.GONE);
+                    leaderboardAdapter.setLeaderboard(event.getLeadingRuns());
+                }
+                else {
+                    noLeaderboard.setVisibility(View.VISIBLE);
+                }
             }
             else {
                 FormUtils.showSnackbar(parent, getString(R.string.leaderboard_error));
                 if (leaderboardAdapter.getCount() == 0) {
-
+                    noLeaderboard.setVisibility(View.VISIBLE);
                 }
             }
         }

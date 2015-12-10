@@ -73,6 +73,23 @@ public class LeaderboardAdapter extends BaseAdapter {
             holder = (LeadingRunViewHolder) view.getTag();
         }
 
+        switch (position) {
+            case 0:
+                holder.placing.setBackgroundResource(R.drawable.circular_border_gold);
+                holder.placing.setTextColor(context.getResources().getColor(R.color.gold));
+                break;
+            case 1:
+                holder.placing.setBackgroundResource(R.drawable.circular_border_silver);
+                holder.placing.setTextColor(context.getResources().getColor(R.color.silver));
+                break;
+            case 2:
+                holder.placing.setBackgroundResource(R.drawable.circular_border_bronze);
+                holder.placing.setTextColor(context.getResources().getColor(R.color.bronze));
+                break;
+            default:
+                holder.placing.setBackgroundResource(R.drawable.circular_border_regular);
+                holder.placing.setTextColor(context.getResources().getColor(R.color.dark_gray));
+        }
         holder.placing.setText(String.valueOf(position + 1));
         holder.userTag.setText(getItem(position).getUserTag());
         holder.numCorrect.setText(String.valueOf(getItem(position).getNumCorrect()));
