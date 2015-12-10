@@ -1,4 +1,4 @@
-package com.randomappsinc.mathrace.Layout;
+package com.randomappsinc.mathrace.Animations;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

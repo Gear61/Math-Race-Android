@@ -24,7 +24,7 @@ public class GetStoriesCallback implements Callback<List<RunStory>> {
     @Override
     public void onResponse(Response<List<RunStory>> response, Retrofit retrofit) {
         if (response.code() == ApiConstants.HTTP_STATUS_OK) {
-            EventBus.getDefault().post(new StoriesEvent(mode, null));
+            EventBus.getDefault().post(new StoriesEvent(mode, response.body()));
         }
         else {
             EventBus.getDefault().post(new StoriesEvent(mode, null));

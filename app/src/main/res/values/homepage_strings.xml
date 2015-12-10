@@ -29,4 +29,6 @@
         <item>@string/addition</item>
         <item>@string/subtraction</item>
     </string-array>
+
+    <string name="pick_race">Pick race</string>
 </resources>

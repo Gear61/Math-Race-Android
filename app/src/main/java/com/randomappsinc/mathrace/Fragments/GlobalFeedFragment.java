@@ -12,6 +12,10 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.github.clans.fab.FloatingActionButton;
+import com.github.clans.fab.FloatingActionMenu;
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Callbacks.GetStoriesCallback;
 import com.randomappsinc.mathrace.API.RestClient;
@@ -21,7 +25,6 @@ import com.randomappsinc.mathrace.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -34,7 +37,9 @@ public class GlobalFeedFragment extends Fragment
     @Bind(R.id.super_parent) View parent;
     @Bind(R.id.fetch_new_content) SwipeRefreshLayout fetchNewStories;
     @Bind(R.id.no_content) View noStories;
-    @Bind(R.id.pick_race) View pickRace;
+    @Bind(R.id.pick_race) FloatingActionMenu pickRace;
+    @Bind(R.id.addition_race) FloatingActionButton additionRace;
+    @Bind(R.id.subtraction_race) FloatingActionButton subtractionRace;
 
     private StoriesAdapter storiesAdapter;
     private int lastIndexToTrigger;
@@ -51,6 +56,12 @@ public class GlobalFeedFragment extends Fragment
         EventBus.getDefault().register(this);
         lastIndexToTrigger = 0;
 
+        pickRace.getMenuIconView().setImageResource(R.drawable.race_icon);
+        pickRace.setIconAnimated(false);
+        additionRace.setImageDrawable(new IconDrawable(getActivity(),
+                FontAwesomeIcons.fa_plus).colorRes(R.color.white));
+        subtractionRace.setImageDrawable(new IconDrawable(getActivity(),
+                FontAwesomeIcons.fa_minus).colorRes(R.color.white));
         storiesAdapter = new StoriesAdapter(getActivity());
         stories.setAdapter(storiesAdapter);
         stories.setOnScrollListener(this);
@@ -59,11 +70,6 @@ public class GlobalFeedFragment extends Fragment
         fetchNewestStories();
 
         return rootView;
-    }
-
-    @OnClick(R.id.pick_race)
-    public void startRace(View view) {
-
     }
 
     public void fetchNewestStories() {
@@ -152,7 +158,8 @@ public class GlobalFeedFragment extends Fragment
         textView.setTextColor(Color.WHITE);
         storiesError.getView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
             @Override
-            public void onViewAttachedToWindow(View v) {}
+            public void onViewAttachedToWindow(View v) {
+            }
 
             @Override
             public void onViewDetachedFromWindow(View v) {

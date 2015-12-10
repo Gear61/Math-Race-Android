@@ -18,15 +18,27 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
-        app:layout_behavior="com.randomappsinc.mathrace.Layout.FABMenuBehavior"
-        fab:menu_icon="@drawable/fab_add"
-        fab:menu_fab_label="your_label_here">
+        app:layout_behavior="com.randomappsinc.mathrace.Animations.FABMenuBehavior"
+        fab:menu_fab_label="@string/pick_race"
+        fab:menu_colorNormal="@color/app_blue"
+        fab:menu_colorPressed="@color/light_blue">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/addition_race"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_size="mini"
-            fab:fab_label="Menu item 1"/>
+            fab:fab_label="@string/addition"
+            app:fab_colorNormal="@color/app_blue"
+            app:fab_colorPressed="@color/light_blue"/>
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/subtraction_race"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_size="mini"
+            fab:fab_label="@string/subtraction"
+            app:fab_colorNormal="@color/app_blue"
+            app:fab_colorPressed="@color/light_blue"/>
     </com.github.clans.fab.FloatingActionMenu>
 </android.support.design.widget.CoordinatorLayout>
