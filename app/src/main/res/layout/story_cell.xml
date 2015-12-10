@@ -76,7 +76,7 @@
 
     <com.rey.material.widget.ProgressView
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/loading_stories"
+        android:id="@+id/loading"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_margin="15dp"

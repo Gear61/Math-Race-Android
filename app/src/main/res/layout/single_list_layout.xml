@@ -5,13 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:orientation="vertical"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/no_stories"
+            android:id="@+id/no_content"
             android:visibility="gone"
             android:layout_marginTop="75dp"
             android:layout_marginLeft="25dp"
@@ -19,32 +18,32 @@
             android:text="@string/no_stories_to_display"
             android:textSize="24sp"
             android:textColor="@color/dark_gray"
-            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <com.rey.material.widget.ProgressView
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/loading_stories"
+            android:id="@+id/loading"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             app:pv_autostart="true"
             app:pv_circular="true"
             app:pv_progressStyle="@style/Material.Drawable.CircularProgress"
             app:pv_progressMode="indeterminate"/>
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/fetch_new_stories"
+            android:id="@+id/fetch_new_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone">
 
             <ListView
-                android:id="@+id/stories"
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             </ListView>
         </android.support.v4.widget.SwipeRefreshLayout>
-    </RelativeLayout>
+    </FrameLayout>
 </android.support.design.widget.CoordinatorLayout>

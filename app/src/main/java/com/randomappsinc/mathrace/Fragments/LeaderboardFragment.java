@@ -26,10 +26,10 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
     public static final String RUN_TYPE_KEY = "runType";
 
     @Bind(R.id.parent) View parent;
-    @Bind(R.id.loading_leaderboard) View loadingLeaderboard;
-    @Bind(R.id.update_leaderboard) SwipeRefreshLayout updateLeaderboard;
-    @Bind(R.id.leaderboard) ListView leaderboard;
-    @Bind(R.id.no_leaderboard) View noLeaderboard;
+    @Bind(R.id.loading) View loadingLeaderboard;
+    @Bind(R.id.fetch_new_content) SwipeRefreshLayout updateLeaderboard;
+    @Bind(R.id.content) ListView leaderboard;
+    @Bind(R.id.no_content) View noLeaderboard;
 
     private String runType;
     private LeaderboardAdapter leaderboardAdapter;
@@ -41,7 +41,7 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.leaderboard, container, false);
+        View rootView = inflater.inflate(R.layout.single_list_layout, container, false);
         ButterKnife.bind(this, rootView);
         EventBus.getDefault().register(this);
         runType = getArguments().getString(RUN_TYPE_KEY);

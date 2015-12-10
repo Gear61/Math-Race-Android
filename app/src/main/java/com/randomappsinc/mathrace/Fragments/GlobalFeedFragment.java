@@ -1,13 +1,16 @@
 package com.randomappsinc.mathrace.Fragments;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Callbacks.GetStoriesCallback;
@@ -15,10 +18,10 @@ import com.randomappsinc.mathrace.API.RestClient;
 import com.randomappsinc.mathrace.Adapters.StoriesAdapter;
 import com.randomappsinc.mathrace.Models.Events.StoriesEvent;
 import com.randomappsinc.mathrace.R;
-import com.randomappsinc.mathrace.Utils.FormUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -26,11 +29,12 @@ import de.greenrobot.event.EventBus;
  */
 public class GlobalFeedFragment extends Fragment
         implements SwipeRefreshLayout.OnRefreshListener, ListView.OnScrollListener {
-    @Bind(R.id.loading_stories) View loadingStories;
-    @Bind(R.id.stories) ListView stories;
-    @Bind(R.id.parent) View parent;
-    @Bind(R.id.fetch_new_stories) SwipeRefreshLayout fetchNewStories;
-    @Bind(R.id.no_stories) View noStories;
+    @Bind(R.id.loading) View loadingStories;
+    @Bind(R.id.content) ListView stories;
+    @Bind(R.id.super_parent) View parent;
+    @Bind(R.id.fetch_new_content) SwipeRefreshLayout fetchNewStories;
+    @Bind(R.id.no_content) View noStories;
+    @Bind(R.id.pick_race) View pickRace;
 
     private StoriesAdapter storiesAdapter;
     private int lastIndexToTrigger;
@@ -42,7 +46,7 @@ public class GlobalFeedFragment extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.feed, container, false);
+        View rootView = inflater.inflate(R.layout.global_feed, container, false);
         ButterKnife.bind(this, rootView);
         EventBus.getDefault().register(this);
         lastIndexToTrigger = 0;
@@ -55,6 +59,11 @@ public class GlobalFeedFragment extends Fragment
         fetchNewestStories();
 
         return rootView;
+    }
+
+    @OnClick(R.id.pick_race)
+    public void startRace(View view) {
+
     }
 
     public void fetchNewestStories() {
@@ -94,7 +103,7 @@ public class GlobalFeedFragment extends Fragment
             }
         }
         else {
-            FormUtils.showSnackbar(parent, getString(R.string.fetch_stories_fail));
+            showErrorSnackbar();
         }
     }
 
@@ -133,6 +142,24 @@ public class GlobalFeedFragment extends Fragment
                         String.valueOf(storiesAdapter.getOldestStoryId())).enqueue(callback);
             }
         }
+    }
+
+    public void showErrorSnackbar() {
+        Snackbar storiesError = Snackbar.make(parent, R.string.fetch_stories_fail, Snackbar.LENGTH_LONG);
+        View rootView = storiesError.getView();
+        storiesError.getView().setBackgroundColor(getResources().getColor(R.color.app_blue));
+        TextView textView = (TextView) rootView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setTextColor(Color.WHITE);
+        storiesError.getView().addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {}
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                pickRace.setTranslationY(0);
+            }
+        });
+        storiesError.show();
     }
 
     @Override

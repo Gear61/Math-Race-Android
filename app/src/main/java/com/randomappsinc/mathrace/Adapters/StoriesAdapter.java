@@ -92,7 +92,7 @@ public class StoriesAdapter extends BaseAdapter {
         @Bind(R.id.num_correct) TextView numCorrect;
         @Bind(R.id.num_wrong) TextView numWrong;
         @Bind(R.id.timestamp) TextView timestamp;
-        @Bind(R.id.loading_stories) View loadingStories;
+        @Bind(R.id.loading) View loadingStories;
 
         public StoryViewHolder(View view) {
             ButterKnife.bind(this, view);
