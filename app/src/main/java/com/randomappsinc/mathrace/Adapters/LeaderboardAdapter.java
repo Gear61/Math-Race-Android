@@ -51,6 +51,9 @@ public class LeaderboardAdapter extends BaseAdapter {
 
     public class LeadingRunViewHolder {
         @Bind(R.id.placing) TextView placing;
+        @Bind(R.id.user_tag) TextView userTag;
+        @Bind(R.id.num_correct) TextView numCorrect;
+        @Bind(R.id.num_wrong) TextView numWrong;
 
         public LeadingRunViewHolder(View view) {
             ButterKnife.bind(this, view);
@@ -71,6 +74,9 @@ public class LeaderboardAdapter extends BaseAdapter {
         }
 
         holder.placing.setText(String.valueOf(position + 1));
+        holder.userTag.setText(getItem(position).getUserTag());
+        holder.numCorrect.setText(String.valueOf(getItem(position).getNumCorrect()));
+        holder.numWrong.setText(String.valueOf(getItem(position).getNumWrong()));
 
         return view;
     }

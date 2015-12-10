@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:padding="5dp"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:paddingRight="10dp"
+    android:paddingLeft="10dp"
     android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,7 +27,7 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
@@ -36,6 +39,54 @@
                     android:background="@drawable/circular_border"
                     android:layout_width="50dp"
                     android:layout_height="50dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/user_tag"
+                    style="@style/feed_text"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/check_icon"
+                    android:textColor="@color/green"
+                    style="@style/feed_icon"/>
+
+                <TextView
+                    android:id="@+id/num_correct"
+                    android:textColor="@color/green"
+                    style="@style/feed_right_wrong"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/x_icon"
+                    android:textColor="@color/red"
+                    style="@style/feed_icon"/>
+
+                <TextView
+                    android:id="@+id/num_wrong"
+                    android:textColor="@color/red"
+                    style="@style/feed_right_wrong"/>
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>

@@ -22,7 +22,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by alexanderchiou on 12/8/15.
  */
-public class LeaderboardFragment extends Fragment {
+public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
     public static final String RUN_TYPE_KEY = "runType";
 
     @Bind(R.id.parent) View parent;
@@ -47,6 +47,8 @@ public class LeaderboardFragment extends Fragment {
 
         leaderboardAdapter = new LeaderboardAdapter(getActivity());
         leaderboard.setAdapter(leaderboardAdapter);
+        updateLeaderboard.setColorSchemeResources(R.color.red, R.color.yellow, R.color.green, R.color.app_blue);
+        updateLeaderboard.setOnRefreshListener(this);
 
         return rootView;
     }
@@ -54,10 +56,13 @@ public class LeaderboardFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        fetchLeaderboard();
+        fetchLeaderboard(true);
     }
 
-    public void fetchLeaderboard() {
+    public void fetchLeaderboard(boolean automatic) {
+        if (automatic) {
+            updateLeaderboard.setRefreshing(true);
+        }
         GetLeaderboardCallback callback = new GetLeaderboardCallback(runType);
         RestClient.getInstance().getMathRaceService().getLeaderboard(runType).enqueue(callback);
     }
@@ -65,8 +70,9 @@ public class LeaderboardFragment extends Fragment {
     public void onEvent(LeaderboardEvent event) {
         if (event.getRunType().equals(runType)) {
             loadingLeaderboard.setVisibility(View.GONE);
+            updateLeaderboard.setVisibility(View.VISIBLE);
+            updateLeaderboard.setRefreshing(false);
             if (event.getLeadingRuns() != null) {
-                updateLeaderboard.setVisibility(View.VISIBLE);
                 leaderboardAdapter.setLeaderboard(event.getLeadingRuns());
             }
             else {
@@ -76,6 +82,11 @@ public class LeaderboardFragment extends Fragment {
                 }
             }
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        fetchLeaderboard(false);
     }
 
     @Override
