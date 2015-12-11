@@ -29,8 +29,8 @@ import butterknife.OnEditorAction;
  * Created by alexanderchiou on 12/10/15.
  */
 public class RaceActivity extends StandardActivity {
-    public static final String STARTING_TIME = "2:00";
-    public static final int STARTING_SECONDS = 120;
+    public static final String STARTING_TIME = "1:00";
+    public static final int STARTING_SECONDS = 60;
 
     @Bind(R.id.start_race) View startRace;
     @Bind(R.id.race_layout) View raceLayout;
@@ -135,6 +135,7 @@ public class RaceActivity extends StandardActivity {
         answer.setVisibility(View.GONE);
         submitRun.setVisibility(View.VISIBLE);
         retry.setVisibility(View.VISIBLE);
+        answer.setText("");
     }
 
     @OnClick(R.id.submit_run)

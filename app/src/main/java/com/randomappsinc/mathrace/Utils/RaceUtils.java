@@ -59,7 +59,7 @@ public class RaceUtils {
     }
 
     public static String generatePercentage(int rank, int numTotalRuns) {
-        int percentage = (int) (Math.ceil((double) rank / numTotalRuns) * 100);
+        int percentage = (int) (Math.ceil(((double) rank / numTotalRuns) * 100));
         return String.valueOf(percentage) + "%";
     }
 }
