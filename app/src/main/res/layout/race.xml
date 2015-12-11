@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:padding="15dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -23,7 +24,7 @@
 
         <TextView
             android:id="@+id/timer"
-            android:textSize="32sp"
+            android:textSize="36sp"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
@@ -70,6 +71,31 @@
                     style="@style/race_right_wrong"/>
             </LinearLayout>
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/problem"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:textSize="36sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/answer"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:inputType="numberSigned"
+            android:textColor="@color/black"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="@drawable/answer_input_border"
+            android:textSize="32sp"
+            android:maxLength="3"/>
     </LinearLayout>
 
 </FrameLayout>

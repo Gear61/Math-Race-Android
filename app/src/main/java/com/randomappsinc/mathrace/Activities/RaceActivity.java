@@ -1,19 +1,25 @@
 package com.randomappsinc.mathrace.Activities;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.randomappsinc.mathrace.Models.Problem;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
+import com.randomappsinc.mathrace.Utils.RaceUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnEditorAction;
 
 /**
  * Created by alexanderchiou on 12/10/15.
@@ -26,10 +32,13 @@ public class RaceActivity extends StandardActivity {
     @Bind(R.id.timer) TextView timer;
     @Bind(R.id.num_correct) TextView numCorrectView;
     @Bind(R.id.num_wrong) TextView numWrongView;
+    @Bind(R.id.problem) TextView problem;
+    @Bind(R.id.answer) EditText answer;
 
     private String runType;
     private int numCorrect;
     private int numWrong;
+    private Problem currentProblem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +64,23 @@ public class RaceActivity extends StandardActivity {
         numWrong = 0;
         numCorrectView.setText(String.valueOf(numCorrect));
         numWrongView.setText(String.valueOf(numWrong));
+        setUpNewProblem();
+    }
+
+    public void setUpNewProblem() {
+        currentProblem = RaceUtils.generateProblem(runType);
+        problem.setText(currentProblem.getProblemText());
+    }
+
+    @OnEditorAction(R.id.answer)
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if ((actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN)
+                || (actionId == EditorInfo.IME_ACTION_DONE)) {
+            answer.setText("");
+            setUpNewProblem();
+            return true;
+        }
+        return false;
     }
 
     @Override

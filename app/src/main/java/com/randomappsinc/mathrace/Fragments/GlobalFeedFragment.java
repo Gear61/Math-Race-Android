@@ -179,10 +179,10 @@ public class GlobalFeedFragment extends Fragment
         Intent intent = new Intent(getActivity(), RaceActivity.class);
         switch (view.getId()) {
             case R.id.addition_race:
-                intent.putExtra(Constants.RUN_TYPE_KEY, getString(R.string.addition));
+                intent.putExtra(Constants.RUN_TYPE_KEY, Constants.ADDITION);
                 break;
             case R.id.subtraction_race:
-                intent.putExtra(Constants.RUN_TYPE_KEY, getString(R.string.subtraction));
+                intent.putExtra(Constants.RUN_TYPE_KEY, Constants.SUBTRACTION);
         }
         getActivity().startActivity(intent);
     }
