@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.randomappsinc.mathrace.API.Callbacks.GetLeaderboardCallback;
 import com.randomappsinc.mathrace.API.RestClient;
@@ -28,7 +29,7 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
     @Bind(R.id.loading) View loadingLeaderboard;
     @Bind(R.id.fetch_new_content) SwipeRefreshLayout updateLeaderboard;
     @Bind(R.id.content) ListView leaderboard;
-    @Bind(R.id.no_content) View noLeaderboard;
+    @Bind(R.id.no_content) TextView noLeaderboard;
 
     private String runType;
     private LeaderboardAdapter leaderboardAdapter;
@@ -45,6 +46,7 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
         EventBus.getDefault().register(this);
         runType = getArguments().getString(Constants.RUN_TYPE_KEY);
 
+        noLeaderboard.setText(R.string.no_leaderboard);
         leaderboardAdapter = new LeaderboardAdapter(getActivity());
         leaderboard.setAdapter(leaderboardAdapter);
         leaderboard.setDivider(null);

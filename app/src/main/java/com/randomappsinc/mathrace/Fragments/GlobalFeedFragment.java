@@ -40,7 +40,7 @@ public class GlobalFeedFragment extends Fragment
     @Bind(R.id.content) ListView stories;
     @Bind(R.id.super_parent) View parent;
     @Bind(R.id.fetch_new_content) SwipeRefreshLayout fetchNewStories;
-    @Bind(R.id.no_content) View noStories;
+    @Bind(R.id.no_content) TextView noStories;
     @Bind(R.id.pick_race) FloatingActionMenu pickRace;
     @Bind(R.id.addition_race) FloatingActionButton additionRace;
     @Bind(R.id.subtraction_race) FloatingActionButton subtractionRace;
@@ -60,6 +60,7 @@ public class GlobalFeedFragment extends Fragment
         EventBus.getDefault().register(this);
         lastIndexToTrigger = 0;
 
+        noStories.setText(R.string.no_stories_to_display);
         pickRace.getMenuIconView().setImageResource(R.drawable.race_icon);
         pickRace.setIconAnimated(false);
         additionRace.setImageDrawable(new IconDrawable(getActivity(),

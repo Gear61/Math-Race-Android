@@ -111,6 +111,7 @@ public class RaceActivity extends StandardActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.start_new_race) {
+            FormUtils.hideKeyboard(this);
             raceLayout.setVisibility(View.GONE);
             startRace.setVisibility(View.VISIBLE);
         }
