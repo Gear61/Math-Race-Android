@@ -25,6 +25,7 @@ import com.randomappsinc.mathrace.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -167,6 +168,11 @@ public class GlobalFeedFragment extends Fragment
             }
         });
         storiesError.show();
+    }
+
+    @OnClick({R.id.addition_race, R.id.subtraction_race})
+    public void startRace(View view) {
+        pickRace.close(true);
     }
 
     @Override
