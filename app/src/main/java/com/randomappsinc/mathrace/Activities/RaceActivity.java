@@ -135,6 +135,11 @@ public class RaceActivity extends StandardActivity {
         retry.setVisibility(View.VISIBLE);
     }
 
+    @OnClick(R.id.submit_run)
+    public void submitRun(View view) {
+
+    }
+
     @OnClick(R.id.retry)
     public void retry(View view) {
         raceLayout.setVisibility(View.GONE);

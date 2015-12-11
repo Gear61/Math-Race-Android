@@ -40,5 +40,10 @@
             android:label="@string/settings"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".Activities.EvaluationActivity"
+            android:label="@string/settings"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>

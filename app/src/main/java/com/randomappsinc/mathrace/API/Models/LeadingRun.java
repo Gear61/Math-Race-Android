@@ -9,11 +9,11 @@ import com.google.gson.annotations.SerializedName;
 public class LeadingRun {
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("num_wrong")
     @Expose
-    private Integer numWrong;
+    private int numWrong;
 
     @SerializedName("user_tag")
     @Expose
@@ -21,13 +21,13 @@ public class LeadingRun {
 
     @SerializedName("num_correct")
     @Expose
-    private Integer numCorrect;
+    private int numCorrect;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public Integer getNumWrong() {
+    public int getNumWrong() {
         return numWrong;
     }
 
@@ -35,7 +35,7 @@ public class LeadingRun {
         return userTag;
     }
 
-    public Integer getNumCorrect() {
+    public int getNumCorrect() {
         return numCorrect;
     }
 }

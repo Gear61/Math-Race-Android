@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class RunStory {
     @SerializedName("num_wrong")
     @Expose
-    private Integer numWrong;
+    private int numWrong;
 
     @SerializedName("user_tag")
     @Expose
@@ -17,11 +17,11 @@ public class RunStory {
 
     @SerializedName("num_correct")
     @Expose
-    private Integer numCorrect;
+    private int numCorrect;
 
     @SerializedName("id")
     @Expose
-    private Integer id;
+    private int id;
 
     @SerializedName("run_type")
     @Expose
@@ -29,9 +29,9 @@ public class RunStory {
 
     @SerializedName("time_occurred")
     @Expose
-    private Long timeOccurred;
+    private long timeOccurred;
 
-    public Integer getNumWrong() {
+    public int getNumWrong() {
         return numWrong;
     }
 
@@ -39,11 +39,11 @@ public class RunStory {
         return userTag;
     }
 
-    public Integer getNumCorrect() {
+    public int getNumCorrect() {
         return numCorrect;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -51,7 +51,7 @@ public class RunStory {
         return runType;
     }
 
-    public Long getTimeOccurred() {
+    public long getTimeOccurred() {
         return timeOccurred;
     }
 }

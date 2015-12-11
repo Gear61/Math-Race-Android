@@ -102,5 +102,6 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
+        EventBus.getDefault().unregister(this);
     }
 }
