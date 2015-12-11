@@ -15,11 +15,19 @@ public class Evaluation {
     @Expose
     private int numSuperiorRuns;
 
+    @SerializedName("num_total_runs")
+    @Expose
+    private int numTotalRuns;
+
     public int getId() {
         return id;
     }
 
     public int getNumSuperiorRuns() {
         return numSuperiorRuns;
+    }
+
+    public int getNumTotalRuns() {
+        return numTotalRuns;
     }
 }

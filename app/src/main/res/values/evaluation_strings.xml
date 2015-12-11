@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="evaluation">Evaluation</string>
+    <string name="your_results">Your Results</string>
+    <string name="evaluation_part_1">Out of&#160;</string>
+    <string name="evaluation_part_2">&#160;scores in the&#160;</string>
+    <string name="evaluation_part_3">&#160;category, your score was ranked</string>
+    <string name="evaluation_part_4">This puts your score in the top&#160;</string>
+    <string name="evaluation_part_5">&#160;of all scores.</string>
+    <string name="evaluation_fail">We failed to evaluate your score.</string>
 </resources>
