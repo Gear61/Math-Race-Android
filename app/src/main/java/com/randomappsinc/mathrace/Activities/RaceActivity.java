@@ -1,6 +1,7 @@
 package com.randomappsinc.mathrace.Activities;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,7 @@ import butterknife.OnEditorAction;
  */
 public class RaceActivity extends StandardActivity {
     public static final String STARTING_TIME = "2:00";
+    public static final int STARTING_SECONDS = 120;
 
     @Bind(R.id.start_race) View startRace;
     @Bind(R.id.race_layout) View raceLayout;
@@ -35,11 +37,31 @@ public class RaceActivity extends StandardActivity {
     @Bind(R.id.num_wrong) TextView numWrongView;
     @Bind(R.id.problem) TextView problem;
     @Bind(R.id.answer) EditText answer;
+    @Bind(R.id.submit_run) View submitRun;
+    @Bind(R.id.retry) View retry;
 
     private String runType;
     private int numCorrect;
     private int numWrong;
     private Problem currentProblem;
+    private int secondsRemaining;
+
+    private Handler timerHandler = new Handler();
+    private Runnable timerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            secondsRemaining--;
+            int secondsLeft = secondsRemaining % 60;
+            int minutesLeft = secondsRemaining / 60;
+            timer.setText(String.format("%d:%02d", minutesLeft, secondsLeft));
+            if (secondsRemaining == 0) {
+                endRace();
+            }
+            else {
+                timerHandler.postDelayed(this, 1000);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +81,10 @@ public class RaceActivity extends StandardActivity {
 
     public void startFreshRace() {
         startRace.setVisibility(View.GONE);
+        submitRun.setVisibility(View.GONE);
+        retry.setVisibility(View.GONE);
+        problem.setVisibility(View.VISIBLE);
+        answer.setVisibility(View.VISIBLE);
         raceLayout.setVisibility(View.VISIBLE);
         timer.setText(STARTING_TIME);
         numCorrect = 0;
@@ -68,6 +94,8 @@ public class RaceActivity extends StandardActivity {
         setUpNewProblem();
         answer.requestFocus();
         FormUtils.showKeyboard(this);
+        secondsRemaining = STARTING_SECONDS;
+        timerHandler.postDelayed(timerRunnable, 1000);
     }
 
     public void setUpNewProblem() {
@@ -96,6 +124,21 @@ public class RaceActivity extends StandardActivity {
             return true;
         }
         return false;
+    }
+
+    public void endRace() {
+        timerHandler.removeCallbacks(timerRunnable);
+        FormUtils.hideKeyboard(this);
+        problem.setVisibility(View.GONE);
+        answer.setVisibility(View.GONE);
+        submitRun.setVisibility(View.VISIBLE);
+        retry.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.retry)
+    public void retry(View view) {
+        raceLayout.setVisibility(View.GONE);
+        startRace.setVisibility(View.VISIBLE);
     }
 
     @Override

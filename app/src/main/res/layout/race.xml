@@ -97,6 +97,19 @@
             android:background="@drawable/answer_input_border"
             android:textSize="32sp"
             android:maxLength="3"/>
-    </LinearLayout>
 
+        <com.rey.material.widget.Button
+            android:id="@+id/submit_run"
+            android:text="@string/submit_run"
+            android:layout_marginTop="10dp"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
+
+        <com.rey.material.widget.Button
+            android:id="@+id/retry"
+            android:text="@string/retry"
+            android:layout_marginTop="10dp"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
+    </LinearLayout>
 </FrameLayout>
