@@ -14,6 +14,7 @@ import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.randomappsinc.mathrace.Models.Problem;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
+import com.randomappsinc.mathrace.Utils.FormUtils;
 import com.randomappsinc.mathrace.Utils.RaceUtils;
 
 import butterknife.Bind;
@@ -65,6 +66,8 @@ public class RaceActivity extends StandardActivity {
         numCorrectView.setText(String.valueOf(numCorrect));
         numWrongView.setText(String.valueOf(numWrong));
         setUpNewProblem();
+        answer.requestFocus();
+        FormUtils.showKeyboard(this);
     }
 
     public void setUpNewProblem() {
@@ -72,10 +75,22 @@ public class RaceActivity extends StandardActivity {
         problem.setText(currentProblem.getProblemText());
     }
 
+    public void processAnswer() {
+        if (currentProblem.getAnswer().equals(answer.getText().toString())) {
+            numCorrect++;
+            numCorrectView.setText(String.valueOf(numCorrect));
+        }
+        else {
+            numWrong++;
+            numWrongView.setText(String.valueOf(numWrong));
+        }
+    }
+
     @OnEditorAction(R.id.answer)
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if ((actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN)
                 || (actionId == EditorInfo.IME_ACTION_DONE)) {
+            processAnswer();
             answer.setText("");
             setUpNewProblem();
             return true;
