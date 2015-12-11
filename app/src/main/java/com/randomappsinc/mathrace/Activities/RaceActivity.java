@@ -1,5 +1,6 @@
 package com.randomappsinc.mathrace.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.randomappsinc.mathrace.API.Models.RunStory;
 import com.randomappsinc.mathrace.Models.Problem;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
@@ -27,8 +29,8 @@ import butterknife.OnEditorAction;
  * Created by alexanderchiou on 12/10/15.
  */
 public class RaceActivity extends StandardActivity {
-    public static final String STARTING_TIME = "2:00";
-    public static final int STARTING_SECONDS = 120;
+    public static final String STARTING_TIME = "0:03";
+    public static final int STARTING_SECONDS = 3;
 
     @Bind(R.id.start_race) View startRace;
     @Bind(R.id.race_layout) View raceLayout;
@@ -137,7 +139,12 @@ public class RaceActivity extends StandardActivity {
 
     @OnClick(R.id.submit_run)
     public void submitRun(View view) {
-
+        Intent intent = new Intent(this, EvaluationActivity.class);
+        RunStory run = new RunStory("Alex", numCorrect, numWrong, runType);
+        intent.putExtra(Constants.RUN_KEY, run);
+        startActivity(intent);
+        raceLayout.setVisibility(View.GONE);
+        startRace.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.retry)
