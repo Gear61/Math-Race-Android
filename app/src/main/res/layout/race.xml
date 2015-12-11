@@ -12,6 +12,64 @@
         android:text="@string/start"
         android:layout_gravity="center"
         style="@style/ripple_button_style"
-        app:rd_style="@style/button_ripple_attributes" />
+        app:rd_style="@style/button_ripple_attributes"/>
+
+    <LinearLayout
+        android:id="@+id/race_layout"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/timer"
+            android:textSize="32sp"
+            android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/check_icon"
+                    android:textColor="@color/green"
+                    style="@style/race_icon"/>
+
+                <TextView
+                    android:id="@+id/num_correct"
+                    android:textColor="@color/green"
+                    style="@style/race_right_wrong"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/x_icon"
+                    android:textColor="@color/red"
+                    style="@style/race_icon"/>
+
+                <TextView
+                    android:id="@+id/num_wrong"
+                    android:textColor="@color/red"
+                    style="@style/race_right_wrong"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 
 </FrameLayout>
