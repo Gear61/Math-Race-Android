@@ -13,6 +13,7 @@ import com.randomappsinc.mathrace.API.RestClient;
 import com.randomappsinc.mathrace.Adapters.LeaderboardAdapter;
 import com.randomappsinc.mathrace.Models.Events.LeaderboardEvent;
 import com.randomappsinc.mathrace.R;
+import com.randomappsinc.mathrace.Utils.Constants;
 import com.randomappsinc.mathrace.Utils.FormUtils;
 
 import butterknife.Bind;
@@ -23,8 +24,6 @@ import de.greenrobot.event.EventBus;
  * Created by alexanderchiou on 12/8/15.
  */
 public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
-    public static final String RUN_TYPE_KEY = "runType";
-
     @Bind(R.id.parent) View parent;
     @Bind(R.id.loading) View loadingLeaderboard;
     @Bind(R.id.fetch_new_content) SwipeRefreshLayout updateLeaderboard;
@@ -44,7 +43,7 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
         View rootView = inflater.inflate(R.layout.single_list_layout, container, false);
         ButterKnife.bind(this, rootView);
         EventBus.getDefault().register(this);
-        runType = getArguments().getString(RUN_TYPE_KEY);
+        runType = getArguments().getString(Constants.RUN_TYPE_KEY);
 
         leaderboardAdapter = new LeaderboardAdapter(getActivity());
         leaderboard.setAdapter(leaderboardAdapter);

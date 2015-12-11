@@ -1,10 +1,5 @@
 package com.randomappsinc.mathrace.Utils;
 
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-
 /**
  * Created by alexanderchiou on 12/7/15.
  */

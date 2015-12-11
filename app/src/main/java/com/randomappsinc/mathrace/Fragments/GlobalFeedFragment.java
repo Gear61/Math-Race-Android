@@ -1,6 +1,7 @@
 package com.randomappsinc.mathrace.Fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -19,9 +20,11 @@ import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Callbacks.GetStoriesCallback;
 import com.randomappsinc.mathrace.API.RestClient;
+import com.randomappsinc.mathrace.Activities.RaceActivity;
 import com.randomappsinc.mathrace.Adapters.StoriesAdapter;
 import com.randomappsinc.mathrace.Models.Events.StoriesEvent;
 import com.randomappsinc.mathrace.R;
+import com.randomappsinc.mathrace.Utils.Constants;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -172,7 +175,16 @@ public class GlobalFeedFragment extends Fragment
 
     @OnClick({R.id.addition_race, R.id.subtraction_race})
     public void startRace(View view) {
-        pickRace.close(true);
+        pickRace.close(false);
+        Intent intent = new Intent(getActivity(), RaceActivity.class);
+        switch (view.getId()) {
+            case R.id.addition_race:
+                intent.putExtra(Constants.RUN_TYPE_KEY, getString(R.string.addition));
+                break;
+            case R.id.subtraction_race:
+                intent.putExtra(Constants.RUN_TYPE_KEY, getString(R.string.subtraction));
+        }
+        getActivity().startActivity(intent);
     }
 
     @Override

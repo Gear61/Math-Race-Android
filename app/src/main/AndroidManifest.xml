@@ -35,5 +35,10 @@
             android:label="@string/settings"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".Activities.RaceActivity"
+            android:label="@string/settings"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>
