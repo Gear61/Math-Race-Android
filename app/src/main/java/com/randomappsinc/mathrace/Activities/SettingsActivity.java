@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.randomappsinc.mathrace.Adapters.FontAwesomeAdapter;
 import com.randomappsinc.mathrace.R;
-import com.randomappsinc.mathrace.Utils.Constants;
 import com.randomappsinc.mathrace.Utils.FormUtils;
 
 import butterknife.Bind;
@@ -47,7 +46,6 @@ public class SettingsActivity extends StandardActivity {
         switch (position) {
             case 0:
                 intent = new Intent(this, ChooseUserTagActivity.class);
-                intent.putExtra(Constants.FIRST_TIME_KEY, false);
                 break;
             case 1:
                 String uriText = "mailto:" + SUPPORT_EMAIL + "?subject=" + Uri.encode(feedbackSubject);

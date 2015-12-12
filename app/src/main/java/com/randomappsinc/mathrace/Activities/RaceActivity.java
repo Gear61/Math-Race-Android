@@ -15,6 +15,7 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.randomappsinc.mathrace.API.Models.RunStory;
 import com.randomappsinc.mathrace.Models.Problem;
+import com.randomappsinc.mathrace.Persistence.PreferencesManager;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
 import com.randomappsinc.mathrace.Utils.FormUtils;
@@ -141,7 +142,7 @@ public class RaceActivity extends StandardActivity {
     @OnClick(R.id.submit_run)
     public void submitRun(View view) {
         Intent intent = new Intent(this, EvaluationActivity.class);
-        RunStory run = new RunStory("Alex", numCorrect, numWrong, runType);
+        RunStory run = new RunStory(PreferencesManager.get().getUserTag(), numCorrect, numWrong, runType);
         intent.putExtra(Constants.RUN_KEY, run);
         startActivity(intent);
         raceLayout.setVisibility(View.GONE);

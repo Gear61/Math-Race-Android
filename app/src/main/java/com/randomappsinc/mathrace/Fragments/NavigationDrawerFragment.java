@@ -18,10 +18,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.randomappsinc.mathrace.Adapters.FontAwesomeAdapter;
+import com.randomappsinc.mathrace.Persistence.PreferencesManager;
 import com.randomappsinc.mathrace.R;
 
 import butterknife.Bind;
@@ -39,8 +41,8 @@ public class NavigationDrawerFragment extends Fragment {
     private DrawerLayout mDrawerLayout;
     private View mFragmentContainerView;
 
-    @Bind(R.id.nav_drawer_tabs)
-    ListView mDrawerListView;
+    @Bind(R.id.user_tag) TextView userTag;
+    @Bind(R.id.nav_drawer_tabs) ListView mDrawerListView;
 
     private int mCurrentSelectedPosition = 0;
 
@@ -52,6 +54,12 @@ public class NavigationDrawerFragment extends Fragment {
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        userTag.setText(PreferencesManager.get().getUserTag());
     }
 
     @Override

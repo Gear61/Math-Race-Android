@@ -38,7 +38,7 @@ public class PreferencesManager {
         return prefs.getString(USER_TAG_KEY, "");
     }
 
-    public void setFirstTimeUser(String userTag) {
+    public void setUserTag(String userTag) {
         prefs.edit().putString(USER_TAG_KEY, userTag).apply();
     }
 }

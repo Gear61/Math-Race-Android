@@ -5,4 +5,5 @@
         Your user tag is how you appear to other users in the Math Race leaderboards and feed stories.</string>
     <string name="update_tag">Enter your new user tag below.</string>
     <string name="submit">Submit</string>
+    <string name="blank_tag">Your user tag cannot be blank.</string>
 </resources>
