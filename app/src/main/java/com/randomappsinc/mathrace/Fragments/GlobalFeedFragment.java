@@ -72,7 +72,6 @@ public class GlobalFeedFragment extends Fragment
         stories.setOnScrollListener(this);
         fetchNewStories.setColorSchemeResources(R.color.red, R.color.yellow, R.color.green, R.color.app_blue);
         fetchNewStories.setOnRefreshListener(this);
-        fetchNewestStories();
 
         return rootView;
     }
@@ -87,6 +86,12 @@ public class GlobalFeedFragment extends Fragment
         super.onResume();
         if (storiesAdapter.getCount() != 0) {
             fetchNewStories(true);
+        }
+        else {
+            if (fetchNewStories.getVisibility() == View.VISIBLE) {
+                fetchNewStories.setRefreshing(true);
+            }
+            fetchNewestStories();
         }
     }
 

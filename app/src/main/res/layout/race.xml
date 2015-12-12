@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
+    android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -12,6 +11,8 @@
         android:id="@+id/start_race"
         android:text="@string/start"
         android:layout_gravity="center"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
         style="@style/ripple_button_style"
         app:rd_style="@style/button_ripple_attributes"/>
 
@@ -24,7 +25,6 @@
 
         <TextView
             android:id="@+id/timer"
-            android:layout_marginTop="5dp"
             android:textSize="36sp"
             android:textColor="@color/black"
             android:layout_gravity="center_horizontal"
