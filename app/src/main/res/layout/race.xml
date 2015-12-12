@@ -94,8 +94,8 @@
             android:singleLine="true"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:background="@drawable/answer_input_border"
-            android:textSize="32sp"
+            android:background="@drawable/text_input_border"
+            android:textSize="32dp"
             android:maxLength="3"/>
 
         <com.rey.material.widget.Button

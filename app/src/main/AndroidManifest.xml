@@ -44,5 +44,11 @@
             android:label="@string/evaluation"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".Activities.ChooseUserTagActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysVisible"
+            android:label="@string/set_user_tag"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>

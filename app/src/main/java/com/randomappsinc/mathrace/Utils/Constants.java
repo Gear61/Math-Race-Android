@@ -8,4 +8,5 @@ public class Constants {
     public static final String ADDITION = "Addition";
     public static final String SUBTRACTION = "Subtraction";
     public static final String RUN_KEY = "run";
+    public static final String FIRST_TIME_KEY = "firstTime";
 }

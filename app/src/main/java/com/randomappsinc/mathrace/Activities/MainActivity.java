@@ -13,6 +13,7 @@ import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.randomappsinc.mathrace.Fragments.GlobalFeedFragment;
 import com.randomappsinc.mathrace.Fragments.NavigationDrawerFragment;
+import com.randomappsinc.mathrace.Persistence.PreferencesManager;
 import com.randomappsinc.mathrace.R;
 
 public class MainActivity extends AppCompatActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -22,6 +23,10 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (PreferencesManager.get().getUserTag().isEmpty()) {
+            startActivity(new Intent(this, ChooseUserTagActivity.class));
+        }
 
         setContentView(R.layout.homepage);
         mNavigationDrawerFragment = (NavigationDrawerFragment)

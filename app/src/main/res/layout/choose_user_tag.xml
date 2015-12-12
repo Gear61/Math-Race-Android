@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/choose_tag_first_time"
+            android:textSize="18sp"
+            android:textColor="@color/dark_gray"/>
+
+        <EditText
+            android:id="@+id/user_tag"
+            android:layout_marginTop="15dp"
+            android:padding="10dp"
+            android:inputType="textPersonName"
+            android:textColor="@color/black"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:background="@drawable/text_input_border"
+            android:textSize="32dp"
+            android:maxLength="4"/>
+
+        <com.rey.material.widget.Button
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/submit"
+            android:text="@string/submit"
+            android:layout_marginTop="15dp"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
+    </LinearLayout>
+</ScrollView>
