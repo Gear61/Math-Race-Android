@@ -26,12 +26,11 @@ public class ChooseUserTagActivity extends StandardActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_user_tag);
         ButterKnife.bind(this);
-        if (PreferencesManager.get().getUserTag().isEmpty()) {
+        if (!PreferencesManager.get().getUserTag().isEmpty()) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            userTag.setText(PreferencesManager.get().getUserTag());
-        }
-        else {
             instructions.setText(R.string.update_tag);
+            userTag.setText(PreferencesManager.get().getUserTag());
+            userTag.setSelection(PreferencesManager.get().getUserTag().length());
         }
     }
 
@@ -45,6 +44,13 @@ public class ChooseUserTagActivity extends StandardActivity {
         else {
             PreferencesManager.get().setUserTag(newTag);
             finish();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!PreferencesManager.get().getUserTag().isEmpty()) {
+            super.onBackPressed();
         }
     }
 }

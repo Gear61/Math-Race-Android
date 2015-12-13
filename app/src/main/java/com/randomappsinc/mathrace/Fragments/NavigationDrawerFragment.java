@@ -1,6 +1,7 @@
 package com.randomappsinc.mathrace.Fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,12 +23,14 @@ import android.widget.TextView;
 
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.randomappsinc.mathrace.Activities.ChooseUserTagActivity;
 import com.randomappsinc.mathrace.Adapters.FontAwesomeAdapter;
 import com.randomappsinc.mathrace.Persistence.PreferencesManager;
 import com.randomappsinc.mathrace.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemClick;
 
 /**
@@ -60,6 +63,11 @@ public class NavigationDrawerFragment extends Fragment {
     public void onResume() {
         super.onResume();
         userTag.setText(PreferencesManager.get().getUserTag());
+    }
+
+    @OnClick(R.id.user_tag)
+    public void changeUserTag(View view) {
+        getActivity().startActivity(new Intent(getActivity(), ChooseUserTagActivity.class));
     }
 
     @Override
