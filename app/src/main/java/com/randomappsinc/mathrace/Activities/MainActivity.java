@@ -94,6 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationDrawerF
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.history) {
+            startActivity(new Intent(this, MyHistoryActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

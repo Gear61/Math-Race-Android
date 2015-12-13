@@ -21,7 +21,7 @@ import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Callbacks.GetStoriesCallback;
 import com.randomappsinc.mathrace.API.RestClient;
 import com.randomappsinc.mathrace.Activities.RaceActivity;
-import com.randomappsinc.mathrace.Adapters.StoriesAdapter;
+import com.randomappsinc.mathrace.Adapters.GlobalFeedAdapter;
 import com.randomappsinc.mathrace.Models.Events.StoriesEvent;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
@@ -45,7 +45,7 @@ public class GlobalFeedFragment extends Fragment
     @Bind(R.id.addition_race) FloatingActionButton additionRace;
     @Bind(R.id.subtraction_race) FloatingActionButton subtractionRace;
 
-    private StoriesAdapter storiesAdapter;
+    private GlobalFeedAdapter globalFeedAdapter;
     private int lastIndexToTrigger;
 
     @Override
@@ -67,8 +67,8 @@ public class GlobalFeedFragment extends Fragment
                 FontAwesomeIcons.fa_plus).colorRes(R.color.white));
         subtractionRace.setImageDrawable(new IconDrawable(getActivity(),
                 FontAwesomeIcons.fa_minus).colorRes(R.color.white));
-        storiesAdapter = new StoriesAdapter(getActivity());
-        stories.setAdapter(storiesAdapter);
+        globalFeedAdapter = new GlobalFeedAdapter(getActivity());
+        stories.setAdapter(globalFeedAdapter);
         stories.setOnScrollListener(this);
         fetchNewStories.setColorSchemeResources(R.color.red, R.color.yellow, R.color.green, R.color.app_blue);
         fetchNewStories.setOnRefreshListener(this);
@@ -84,7 +84,7 @@ public class GlobalFeedFragment extends Fragment
     @Override
     public void onResume() {
         super.onResume();
-        if (storiesAdapter.getCount() != 0) {
+        if (globalFeedAdapter.getCount() != 0) {
             fetchNewStories(true);
         }
         else {
@@ -112,10 +112,10 @@ public class GlobalFeedFragment extends Fragment
             switch (event.getMode()) {
                 case ApiConstants.NEWEST:
                 case ApiConstants.BEFORE:
-                    storiesAdapter.appendStories(event.getStories());
+                    globalFeedAdapter.appendStories(event.getStories());
                     break;
                 case ApiConstants.AFTER:
-                    storiesAdapter.prependStories(event.getStories());
+                    globalFeedAdapter.prependStories(event.getStories());
             }
         }
         else {
@@ -125,7 +125,7 @@ public class GlobalFeedFragment extends Fragment
 
     @Override
     public void onRefresh() {
-        if (storiesAdapter.getCount() == 0) {
+        if (globalFeedAdapter.getCount() == 0) {
             fetchNewestStories();
         }
         else {
@@ -139,7 +139,7 @@ public class GlobalFeedFragment extends Fragment
         }
         GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.AFTER);
         RestClient.getInstance().getMathRaceService().getStories(ApiConstants.AFTER,
-                String.valueOf(storiesAdapter.getNewestStoryId())).enqueue(callback);
+                String.valueOf(globalFeedAdapter.getNewestStoryId())).enqueue(callback);
     }
 
     @Override
@@ -150,12 +150,12 @@ public class GlobalFeedFragment extends Fragment
         final int bottomIndexSeen = firstVisibleItem + visibleItemCount;
 
         // If visible last item's position is the size of the list, then we've hit the bottom
-        if (storiesAdapter.getExtraItem() == 1 && bottomIndexSeen == totalItemCount) {
+        if (globalFeedAdapter.getExtraItem() == 1 && bottomIndexSeen == totalItemCount) {
             if (lastIndexToTrigger != bottomIndexSeen) {
                 lastIndexToTrigger = bottomIndexSeen;
                 GetStoriesCallback callback = new GetStoriesCallback(ApiConstants.BEFORE);
                 RestClient.getInstance().getMathRaceService().getStories(ApiConstants.BEFORE,
-                        String.valueOf(storiesAdapter.getOldestStoryId())).enqueue(callback);
+                        String.valueOf(globalFeedAdapter.getOldestStoryId())).enqueue(callback);
             }
         }
     }

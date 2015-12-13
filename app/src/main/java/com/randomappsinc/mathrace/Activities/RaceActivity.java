@@ -107,11 +107,16 @@ public class RaceActivity extends StandardActivity {
     }
 
     public void processAnswer() {
-        if (currentProblem.getAnswer() == Integer.parseInt(answer.getText().toString())) {
-            numCorrect++;
-            numCorrectView.setText(String.valueOf(numCorrect));
+        try {
+            if (currentProblem.getAnswer() == Integer.parseInt(answer.getText().toString())) {
+                numCorrect++;
+                numCorrectView.setText(String.valueOf(numCorrect));
+            } else {
+                numWrong++;
+                numWrongView.setText(String.valueOf(numWrong));
+            }
         }
-        else {
+        catch (NumberFormatException e) {
             numWrong++;
             numWrongView.setText(String.valueOf(numWrong));
         }

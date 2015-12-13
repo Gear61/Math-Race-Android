@@ -21,12 +21,12 @@ import butterknife.ButterKnife;
 /**
  * Created by alexanderchiou on 12/7/15.
  */
-public class StoriesAdapter extends BaseAdapter {
+public class GlobalFeedAdapter extends BaseAdapter {
     private Context context;
     private List<RunStory> stories;
     private int extraItem;
 
-    public StoriesAdapter(Context context) {
+    public GlobalFeedAdapter(Context context) {
         this.context = context;
         this.stories = new ArrayList<>();
         this.extraItem = 0;

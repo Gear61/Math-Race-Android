@@ -50,5 +50,10 @@
             android:label="@string/set_user_tag"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".Activities.MyHistoryActivity"
+            android:label="@string/my_history"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 </manifest>
