@@ -8,13 +8,16 @@ import java.util.Random;
  * Created by alexanderchiou on 12/10/15.
  */
 public class RaceUtils {
-    public static final int OPERAND_CAP = 99;
+    // Cap is non-inclusive
+    public static final int OPERAND_CAP = 100;
 
     public static Problem generateProblem(String type) {
         Problem problem = new Problem();
 
         int firstNumber = generateRandomNumber(OPERAND_CAP);
-        int secondNumber = generateRandomNumber(OPERAND_CAP);
+        int secondNumber = type.equals(Constants.ADDITION)
+                ? generateRandomNumber(OPERAND_CAP)
+                : generateRandomNumber(firstNumber + 1);
         switch (type) {
             case Constants.ADDITION:
                 problem.setProblemText(String.valueOf(firstNumber) + " + " + String.valueOf(secondNumber) + " = ?");
@@ -30,7 +33,7 @@ public class RaceUtils {
 
     public static int generateRandomNumber(int max) {
         Random rand = new Random();
-        return rand.nextInt(max) + 1;
+        return rand.nextInt(max);
     }
 
     public static String generateRank(int numSuperiorRuns) {
@@ -59,7 +62,7 @@ public class RaceUtils {
     }
 
     public static String generatePercentage(int rank, int numTotalRuns) {
-        int percentage = (int) (Math.ceil(((double) rank / numTotalRuns) * 100));
-        return String.valueOf(percentage) + "%";
+        double percentage = ((double) rank / numTotalRuns) * 100;
+        return String.format("%.2f", percentage) + "%";
     }
 }
