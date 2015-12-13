@@ -22,11 +22,8 @@ import de.greenrobot.event.EventBus;
 public class EvaluationActivity extends StandardActivity {
     @Bind(R.id.loading) View loading;
     @Bind(R.id.evaluation_summary) View summary;
-    @Bind(R.id.evaluation_pre_rank) TextView preRank;
     @Bind(R.id.rank) TextView rank;
-    @Bind(R.id.percentage) TextView percentage;
-
-    private RunStory run;
+    @Bind(R.id.percentile) TextView percentile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +33,7 @@ public class EvaluationActivity extends StandardActivity {
         EventBus.getDefault().register(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        run = getIntent().getParcelableExtra(Constants.RUN_KEY);
+        RunStory run = getIntent().getParcelableExtra(Constants.RUN_KEY);
         EvaluationCallback callback = new EvaluationCallback(run);
         RestClient.getInstance().getMathRaceService().addScore(run).enqueue(callback);
     }
@@ -44,18 +41,12 @@ public class EvaluationActivity extends StandardActivity {
     public void onEvent(EvaluationEvent event) {
         loading.setVisibility(View.GONE);
         if (event.getEvaluation() != null) {
-            String preRankText = getString(R.string.evaluation_part_1)
-                    + String.valueOf(event.getEvaluation().getNumTotalRuns())
-                    + getString(R.string.evaluation_part_2)
-                    + run.getRunType()
-                    + getString(R.string.evaluation_part_3);
-            preRank.setText(preRankText);
-            rank.setText(RaceUtils.generateRank(event.getEvaluation().getNumSuperiorRuns()));
-            String percentageText = getString(R.string.evaluation_part_4)
-                    + RaceUtils.generatePercentage(event.getEvaluation().getNumSuperiorRuns() + 1,
-                    event.getEvaluation().getNumTotalRuns())
-                    + getString(R.string.evaluation_part_5);
-            percentage.setText(percentageText);
+            String rankText = RaceUtils.generateRank(event.getEvaluation().getNumSuperiorRuns())
+                    + getString(R.string.out_of)
+                    + String.valueOf(event.getEvaluation().getNumTotalRuns());
+            rank.setText(rankText);
+            percentile.setText(RaceUtils.generatePercentile(event.getEvaluation().getNumSuperiorRuns() + 1,
+                    event.getEvaluation().getNumTotalRuns()));
             summary.setVisibility(View.VISIBLE);
         }
     }

@@ -19,32 +19,25 @@
 
     <LinearLayout
         android:id="@+id/evaluation_summary"
+        android:visibility="gone"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/evaluation_pre_rank"
-            android:textColor="@color/dark_gray"
-            android:textSize="18sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:text="@string/rank"
+            style="@style/evaluation_header"/>
 
         <TextView
             android:id="@+id/rank"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textSize="36sp"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            style="@style/evaluation_data"/>
 
         <TextView
-            android:id="@+id/percentage"
-            android:textColor="@color/dark_gray"
-            android:textSize="18sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:text="@string/percentile"
+            style="@style/evaluation_header"/>
+
+        <TextView
+            android:id="@+id/percentile"
+            style="@style/evaluation_data"/>
     </LinearLayout>
 </FrameLayout>

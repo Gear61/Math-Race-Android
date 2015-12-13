@@ -39,30 +39,36 @@ public class RaceUtils {
     public static String generateRank(int numSuperiorRuns) {
         int position = numSuperiorRuns + 1;
         String rank = String.valueOf(position);
-        switch (position % 10) {
-            case 0:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
-                rank += "th";
-                break;
-            case 1:
-                rank += "st";
-                break;
-            case 2:
-                rank += "nd";
-                break;
-            case 3:
-                rank += "rd";
+        int lastTwoDigits = position % 100;
+        if (lastTwoDigits >= 11 && lastTwoDigits <= 19) {
+            rank += "th";
+        }
+        else {
+            switch (position % 10) {
+                case 0:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    rank += "th";
+                    break;
+                case 1:
+                    rank += "st";
+                    break;
+                case 2:
+                    rank += "nd";
+                    break;
+                case 3:
+                    rank += "rd";
+            }
         }
         return rank;
     }
 
-    public static String generatePercentage(int rank, int numTotalRuns) {
-        double percentage = ((double) rank / numTotalRuns) * 100;
-        return String.format("%.2f", percentage) + "%";
+    public static String generatePercentile(int rank, int numTotalRuns) {
+        double percentile = 100 - ((double) rank / numTotalRuns) * 100;
+        return String.format("%.2f", percentile);
     }
 }

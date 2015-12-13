@@ -30,8 +30,8 @@ import butterknife.OnEditorAction;
  * Created by alexanderchiou on 12/10/15.
  */
 public class RaceActivity extends StandardActivity {
-    public static final String STARTING_TIME = "1:00";
-    public static final int STARTING_SECONDS = 60;
+    public static final String STARTING_TIME = "0:01";
+    public static final int STARTING_SECONDS = 1;
 
     @Bind(R.id.start_race) View startRace;
     @Bind(R.id.race_layout) View raceLayout;
