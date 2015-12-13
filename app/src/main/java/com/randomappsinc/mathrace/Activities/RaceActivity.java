@@ -107,7 +107,7 @@ public class RaceActivity extends StandardActivity {
     }
 
     public void processAnswer() {
-        if (currentProblem.getAnswer().equals(answer.getText().toString())) {
+        if (currentProblem.getAnswer() == Integer.parseInt(answer.getText().toString())) {
             numCorrect++;
             numCorrectView.setText(String.valueOf(numCorrect));
         }

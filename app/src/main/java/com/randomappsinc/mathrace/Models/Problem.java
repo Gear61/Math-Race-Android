@@ -5,13 +5,13 @@ package com.randomappsinc.mathrace.Models;
  */
 public class Problem {
     private String problemText;
-    private String answer;
+    private int answer;
 
     public String getProblemText() {
         return problemText;
     }
 
-    public String getAnswer() {
+    public int getAnswer() {
         return answer;
     }
 
@@ -19,7 +19,7 @@ public class Problem {
         this.problemText = problemText;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(int answer) {
         this.answer = answer;
     }
 }

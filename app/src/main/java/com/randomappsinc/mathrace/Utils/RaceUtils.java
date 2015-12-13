@@ -21,11 +21,11 @@ public class RaceUtils {
         switch (type) {
             case Constants.ADDITION:
                 problem.setProblemText(String.valueOf(firstNumber) + " + " + String.valueOf(secondNumber) + " = ?");
-                problem.setAnswer(String.valueOf(firstNumber + secondNumber));
+                problem.setAnswer(firstNumber + secondNumber);
                 break;
             case Constants.SUBTRACTION:
                 problem.setProblemText(String.valueOf(firstNumber) + " - " + String.valueOf(secondNumber) + " = ?");
-                problem.setAnswer(String.valueOf(firstNumber - secondNumber));
+                problem.setAnswer(firstNumber - secondNumber);
         }
 
         return problem;
