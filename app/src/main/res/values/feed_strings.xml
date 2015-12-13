@@ -4,4 +4,5 @@
     <string name="x_icon">{fa-remove}</string>
     <string name="no_stories_to_display">No stories to display.</string>
     <string name="fetch_stories_fail">We failed to fetch stories for you at this time. Please try again later.</string>
+    <string name="you">&#160;(You)</string>
 </resources>

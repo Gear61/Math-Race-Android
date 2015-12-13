@@ -19,6 +19,10 @@ public class Evaluation {
     @Expose
     private int numTotalRuns;
 
+    @SerializedName("time_occurred")
+    @Expose
+    private long timeOccured;
+
     public int getId() {
         return id;
     }
@@ -29,5 +33,9 @@ public class Evaluation {
 
     public int getNumTotalRuns() {
         return numTotalRuns;
+    }
+
+    public long getTimeOccured() {
+        return timeOccured;
     }
 }
