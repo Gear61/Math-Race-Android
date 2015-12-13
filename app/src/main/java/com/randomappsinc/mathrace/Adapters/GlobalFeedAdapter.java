@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Models.RunStory;
+import com.randomappsinc.mathrace.Persistence.Database.DatabaseManager;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.FeedUtils;
 
@@ -122,7 +123,11 @@ public class GlobalFeedAdapter extends BaseAdapter {
             holder.runData.setVisibility(View.VISIBLE);
             holder.timestamp.setVisibility(View.VISIBLE);
 
-            holder.userTag.setText(getItem(position).getUserTag());
+            String userTag = getItem(position).getUserTag();
+            if (DatabaseManager.get().didThisRun(getItem(position).getId())) {
+                userTag += context.getString(R.string.you);
+            }
+            holder.userTag.setText(userTag);
             holder.runType.setText(getItem(position).getRunType());
             holder.numCorrect.setText(String.valueOf(getItem(position).getNumCorrect()));
             holder.numWrong.setText(String.valueOf(getItem(position).getNumWrong()));

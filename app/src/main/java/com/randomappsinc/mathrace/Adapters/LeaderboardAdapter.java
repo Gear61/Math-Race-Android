@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.randomappsinc.mathrace.API.Models.LeadingRun;
+import com.randomappsinc.mathrace.Persistence.Database.DatabaseManager;
 import com.randomappsinc.mathrace.R;
 
 import java.util.ArrayList;
@@ -91,7 +92,11 @@ public class LeaderboardAdapter extends BaseAdapter {
                 holder.placing.setTextColor(context.getResources().getColor(R.color.dark_gray));
         }
         holder.placing.setText(String.valueOf(position + 1));
-        holder.userTag.setText(getItem(position).getUserTag());
+        String userTag = getItem(position).getUserTag();
+        if (DatabaseManager.get().didThisRun(getItem(position).getId())) {
+            userTag += context.getString(R.string.you);
+        }
+        holder.userTag.setText(userTag);
         holder.numCorrect.setText(String.valueOf(getItem(position).getNumCorrect()));
         holder.numWrong.setText(String.valueOf(getItem(position).getNumWrong()));
 
