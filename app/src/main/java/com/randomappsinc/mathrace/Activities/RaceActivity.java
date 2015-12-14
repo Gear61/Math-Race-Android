@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.joanzapata.iconify.IconDrawable;
 import com.joanzapata.iconify.fonts.FontAwesomeIcons;
 import com.randomappsinc.mathrace.API.Models.RunStory;
@@ -20,6 +21,8 @@ import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
 import com.randomappsinc.mathrace.Utils.FormUtils;
 import com.randomappsinc.mathrace.Utils.RaceUtils;
+
+import java.util.Arrays;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -163,6 +166,10 @@ public class RaceActivity extends StandardActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.race_menu, menu);
+        menu.findItem(R.id.pick_race).setIcon(
+                new IconDrawable(this, FontAwesomeIcons.fa_list)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
         menu.findItem(R.id.start_new_race).setIcon(
                 new IconDrawable(this, FontAwesomeIcons.fa_refresh)
                         .colorRes(R.color.white)
@@ -170,12 +177,42 @@ public class RaceActivity extends StandardActivity {
         return true;
     }
 
+    public void resetRace() {
+        FormUtils.hideKeyboard(this);
+        timerHandler.removeCallbacks(timerRunnable);
+        raceLayout.setVisibility(View.GONE);
+        startRace.setVisibility(View.VISIBLE);
+    }
+
+    public void showPickRaceDialog() {
+        int currentChoiceIndex = Arrays.asList(getResources().getStringArray(R.array.run_types)).indexOf(runType);
+
+        new MaterialDialog.Builder(this)
+                .title(R.string.pick_race)
+                .items(R.array.run_types)
+                .itemsCallbackSingleChoice(currentChoiceIndex, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
+                        runType = text.toString();
+                        setTitle(runType + getString(R.string.race));
+                        resetRace();
+                        return true;
+                    }
+                })
+                .positiveText(R.string.choose)
+                .negativeText(android.R.string.no)
+                .show();
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.start_new_race) {
-            FormUtils.hideKeyboard(this);
-            raceLayout.setVisibility(View.GONE);
-            startRace.setVisibility(View.VISIBLE);
+        switch (item.getItemId()) {
+            case R.id.pick_race:
+                FormUtils.hideKeyboard(this);
+                showPickRaceDialog();
+                break;
+            case R.id.start_new_race:
+                resetRace();
         }
         return super.onOptionsItemSelected(item);
     }
