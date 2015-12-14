@@ -14,6 +14,7 @@ import com.randomappsinc.mathrace.Utils.RaceUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -55,5 +56,10 @@ public class EvaluationActivity extends StandardActivity {
     public void onDestroy() {
         EventBus.getDefault().unregister(this);
         super.onDestroy();
+    }
+
+    @OnClick(R.id.try_again)
+    public void tryAgain(View view) {
+        finish();
     }
 }

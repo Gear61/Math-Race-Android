@@ -5,4 +5,5 @@
     <string name="percentile"><u>Percentile</u></string>
     <string name="out_of">&#160;out of&#160;</string>
     <string name="evaluation_fail">We failed to evaluate your score.</string>
+    <string name="try_again">Try Again</string>
 </resources>

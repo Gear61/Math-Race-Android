@@ -39,5 +39,13 @@
         <TextView
             android:id="@+id/percentile"
             style="@style/evaluation_data"/>
+
+        <com.rey.material.widget.Button
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/try_again"
+            android:text="@string/try_again"
+            android:layout_marginTop="10dp"
+            style="@style/ripple_button_style"
+            app:rd_style="@style/button_ripple_attributes"/>
     </LinearLayout>
 </FrameLayout>
