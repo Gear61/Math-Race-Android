@@ -72,10 +72,10 @@ public class DatabaseManager {
         statsBundle.setNumTotalWrong(totalNumWrong);
 
         double totalQuestionsAnswered = totalNumCorrect + totalNumWrong;
-        statsBundle.setTotalQuestionsCorrect(totalQuestionsAnswered);
+        statsBundle.setTotalQuestionsAnswered(totalQuestionsAnswered);
         statsBundle.setOverallPercentageCorrect(totalNumCorrect / totalQuestionsAnswered);
 
-        double totalSecondsUsed = RaceActivity.STARTING_SECONDS * totalQuestionsAnswered;
+        double totalSecondsUsed = RaceActivity.STARTING_SECONDS * allRuns.size();
         statsBundle.setAverageTimeTaken(totalSecondsUsed / totalQuestionsAnswered);
 
         int highestNumCorrect = allRuns.max("numCorrect").intValue();
@@ -83,10 +83,10 @@ public class DatabaseManager {
         topRuns.sort("numWrong");
         statsBundle.setBestRun(topRuns.first());
 
-        int lowestNumCorrect = allRuns.min("numWrong").intValue();
-        RealmResults<RunDO> worstRuns = allRuns.where().equalTo("numWrong", lowestNumCorrect).findAll();
+        int lowestNumCorrect = allRuns.min("numCorrect").intValue();
+        RealmResults<RunDO> worstRuns = allRuns.where().equalTo("numCorrect", lowestNumCorrect).findAll();
         worstRuns.sort("numWrong", Sort.DESCENDING);
-        statsBundle.setBestRun(topRuns.first());
+        statsBundle.setWorstRun(worstRuns.first());
 
         return statsBundle;
     }

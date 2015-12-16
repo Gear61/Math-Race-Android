@@ -7,9 +7,9 @@ import com.randomappsinc.mathrace.Persistence.Database.RunDO;
  */
 public class StatsBundle {
     private int numTotalRuns;
-    private double totalQuestionsCorrect;
-    private double numTotalCorrect;
-    private double numTotalWrong;
+    private int totalQuestionsAnswered;
+    private int numTotalCorrect;
+    private int numTotalWrong;
     private double overallPercentageCorrect;
     private double averageTimeTaken;
     private RunDO bestRun;
@@ -23,40 +23,42 @@ public class StatsBundle {
         this.numTotalRuns = numTotalRuns;
     }
 
-    public double getTotalQuestionsCorrect() {
-        return totalQuestionsCorrect;
+    public int getTotalQuestionsAnswered() {
+        return totalQuestionsAnswered;
     }
 
-    public void setTotalQuestionsCorrect(double totalQuestionsCorrect) {
-        this.totalQuestionsCorrect = totalQuestionsCorrect;
+    public void setTotalQuestionsAnswered(double totalQuestionsAnswered) {
+        this.totalQuestionsAnswered = (int) totalQuestionsAnswered;
     }
 
-    public double getNumTotalCorrect() {
+    public int getNumTotalCorrect() {
         return numTotalCorrect;
     }
 
     public void setNumTotalCorrect(double numTotalCorrect) {
-        this.numTotalCorrect = numTotalCorrect;
+        this.numTotalCorrect = (int) numTotalCorrect;
     }
 
-    public double getNumTotalWrong() {
+    public int getNumTotalWrong() {
         return numTotalWrong;
     }
 
     public void setNumTotalWrong(double numTotalWrong) {
-        this.numTotalWrong = numTotalWrong;
+        this.numTotalWrong =  (int) numTotalWrong;
     }
 
-    public double getOverallPercentageCorrect() {
-        return overallPercentageCorrect;
+    public String getOverallPercentageCorrect() {
+        String percent = String.format("%.2f", overallPercentageCorrect);
+        return percent + "%";
     }
 
     public void setOverallPercentageCorrect(double overallPercentageCorrect) {
-        this.overallPercentageCorrect = overallPercentageCorrect;
+        this.overallPercentageCorrect = overallPercentageCorrect * 100;
     }
 
-    public double getAverageTimeTaken() {
-        return averageTimeTaken;
+    public String getAverageTimeTaken() {
+        String averageSeconds = String.format("%.2f", averageTimeTaken);
+        return averageSeconds + " seconds";
     }
 
     public void setAverageTimeTaken(double averageTimeTaken) {

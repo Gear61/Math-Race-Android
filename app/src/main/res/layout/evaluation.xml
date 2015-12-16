@@ -26,19 +26,19 @@
 
         <TextView
             android:text="@string/rank"
-            style="@style/evaluation_header"/>
+            style="@style/stat_header"/>
 
         <TextView
             android:id="@+id/rank"
-            style="@style/evaluation_data"/>
+            style="@style/stat_data"/>
 
         <TextView
             android:text="@string/percentile"
-            style="@style/evaluation_header"/>
+            style="@style/stat_header"/>
 
         <TextView
             android:id="@+id/percentile"
-            style="@style/evaluation_data"/>
+            style="@style/stat_data"/>
 
         <com.rey.material.widget.Button
             xmlns:app="http://schemas.android.com/apk/res-auto"

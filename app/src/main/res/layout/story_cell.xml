@@ -29,11 +29,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            style="@style/right_wrong_container">
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:text="@string/check_icon"
@@ -47,11 +43,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:gravity="center_vertical"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            style="@style/right_wrong_container">
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:text="@string/x_icon"

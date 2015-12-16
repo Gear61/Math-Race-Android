@@ -1,7 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-</LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/total_runs"
+            style="@style/stat_header"/>
+
+        <TextView
+            android:id="@+id/total_runs"
+            style="@style/stat_data"/>
+
+        <TextView
+            android:text="@string/total_questions_attempted"
+            style="@style/stat_header"/>
+
+        <TextView
+            android:id="@+id/total_questions_attempted"
+            style="@style/stat_data"/>
+
+        <TextView
+            android:text="@string/total_correct"
+            style="@style/stat_header"/>
+
+        <TextView
+            android:id="@+id/total_correct"
+            style="@style/stat_data"/>
+
+        <TextView
+            android:text="@string/total_wrong"
+            style="@style/stat_header"/>
+
+        <TextView
+            android:id="@+id/total_wrong"
+            style="@style/stat_data"/>
+
+        <TextView
+            android:text="@string/overall_percentage_correct"
+            style="@style/stat_header"/>
+
+        <TextView
+            android:id="@+id/overall_percentage_correct"
+            style="@style/stat_data"/>
+
+        <TextView
+            android:text="@string/average_time_taken"
+            style="@style/stat_header"/>
+
+        <TextView
+            android:id="@+id/average_time_taken"
+            style="@style/stat_data"/>
+
+        <TextView
+            android:text="@string/best_run"
+            style="@style/stat_header"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                style="@style/right_wrong_container"
+                android:gravity="center">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/check_icon"
+                    android:textColor="@color/green"
+                    style="@style/my_stats_icon"/>
+
+                <TextView
+                    android:id="@+id/best_correct"
+                    android:textColor="@color/green"
+                    style="@style/my_stats_right_wrong"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/right_wrong_container"
+                android:gravity="center">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/x_icon"
+                    android:textColor="@color/red"
+                    style="@style/my_stats_icon"/>
+
+                <TextView
+                    android:id="@+id/best_wrong"
+                    android:textColor="@color/red"
+                    style="@style/my_stats_right_wrong"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/worst_run"
+            style="@style/stat_header"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                style="@style/right_wrong_container"
+                android:gravity="center">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/check_icon"
+                    android:textColor="@color/green"
+                    style="@style/my_stats_icon"/>
+
+                <TextView
+                    android:id="@+id/worst_correct"
+                    android:textColor="@color/green"
+                    style="@style/my_stats_right_wrong"/>
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/right_wrong_container"
+                android:gravity="center">
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:text="@string/x_icon"
+                    android:textColor="@color/red"
+                    style="@style/my_stats_icon"/>
+
+                <TextView
+                    android:id="@+id/worst_wrong"
+                    android:textColor="@color/red"
+                    style="@style/my_stats_right_wrong"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

@@ -14,13 +14,13 @@ import butterknife.ButterKnife;
  * Created by alexanderchiou on 12/5/15.
  */
 public class LeaderboardsActivity extends StandardActivity {
-    @Bind(R.id.leaderboard_names) TabLayout leaderboardNames;
-    @Bind(R.id.leaderboard_pager) ViewPager leaderboardPager;
+    @Bind(R.id.tab_layout) TabLayout leaderboardNames;
+    @Bind(R.id.view_pager) ViewPager leaderboardPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.leaderboards);
+        setContentView(R.layout.tabbed_pages_layout);
         ButterKnife.bind(this);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

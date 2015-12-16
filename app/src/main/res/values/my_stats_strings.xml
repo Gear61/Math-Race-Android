@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="total_runs"><u>Total Runs</u></string>
+    <string name="total_questions_attempted"><u>Total Questions Answered</u></string>
+    <string name="total_correct"><u>Total Correct Answers</u></string>
+    <string name="total_wrong"><u>Total Wrong Answers</u></string>
+    <string name="overall_percentage_correct"><u>Overall Percentage Correct</u></string>
+    <string name="average_time_taken"><u>Average Time Per Question</u></string>
+    <string name="best_run"><u>Best Run</u></string>
+    <string name="worst_run"><u>Worst Run</u></string>
+</resources>
