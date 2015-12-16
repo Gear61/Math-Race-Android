@@ -2,6 +2,8 @@ package com.randomappsinc.mathrace.Persistence.Database;
 
 import android.content.Context;
 
+import com.randomappsinc.mathrace.Activities.RaceActivity;
+import com.randomappsinc.mathrace.Models.StatsBundle;
 import com.randomappsinc.mathrace.Utils.MyApplication;
 
 import java.util.List;
@@ -56,5 +58,36 @@ public class DatabaseManager {
         RealmResults<RunDO> history = realm.where(RunDO.class).findAll();
         history.sort("id", Sort.DESCENDING);
         return history;
+    }
+
+    public StatsBundle getStatsBundle(String runType) {
+        StatsBundle statsBundle = new StatsBundle();
+        RealmResults<RunDO> allRuns = realm.where(RunDO.class).equalTo("runType", runType).findAll();
+
+        statsBundle.setNumTotalRuns(allRuns.size());
+
+        double totalNumCorrect = allRuns.sum("numCorrect").doubleValue();
+        statsBundle.setNumTotalCorrect(totalNumCorrect);
+        double totalNumWrong = allRuns.sum("numWrong").doubleValue();
+        statsBundle.setNumTotalWrong(totalNumWrong);
+
+        double totalQuestionsAnswered = totalNumCorrect + totalNumWrong;
+        statsBundle.setTotalQuestionsCorrect(totalQuestionsAnswered);
+        statsBundle.setOverallPercentageCorrect(totalNumCorrect / totalQuestionsAnswered);
+
+        double totalSecondsUsed = RaceActivity.STARTING_SECONDS * totalQuestionsAnswered;
+        statsBundle.setAverageTimeTaken(totalSecondsUsed / totalQuestionsAnswered);
+
+        int highestNumCorrect = allRuns.max("numCorrect").intValue();
+        RealmResults<RunDO> topRuns = allRuns.where().equalTo("numCorrect", highestNumCorrect).findAll();
+        topRuns.sort("numWrong");
+        statsBundle.setBestRun(topRuns.first());
+
+        int lowestNumCorrect = allRuns.min("numWrong").intValue();
+        RealmResults<RunDO> worstRuns = allRuns.where().equalTo("numWrong", lowestNumCorrect).findAll();
+        worstRuns.sort("numWrong", Sort.DESCENDING);
+        statsBundle.setBestRun(topRuns.first());
+
+        return statsBundle;
     }
 }
