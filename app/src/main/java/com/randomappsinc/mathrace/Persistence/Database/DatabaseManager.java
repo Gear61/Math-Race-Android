@@ -72,21 +72,25 @@ public class DatabaseManager {
         statsBundle.setNumTotalWrong(totalNumWrong);
 
         double totalQuestionsAnswered = totalNumCorrect + totalNumWrong;
-        statsBundle.setTotalQuestionsAnswered(totalQuestionsAnswered);
-        statsBundle.setOverallPercentageCorrect(totalNumCorrect / totalQuestionsAnswered);
+        if (totalQuestionsAnswered != 0) {
+            statsBundle.setTotalQuestionsAnswered(totalQuestionsAnswered);
+            statsBundle.setOverallPercentageCorrect(totalNumCorrect / totalQuestionsAnswered);
 
-        double totalSecondsUsed = RaceActivity.STARTING_SECONDS * allRuns.size();
-        statsBundle.setAverageTimeTaken(totalSecondsUsed / totalQuestionsAnswered);
+            double totalSecondsUsed = RaceActivity.STARTING_SECONDS * allRuns.size();
+            statsBundle.setAverageTimeTaken(totalSecondsUsed / totalQuestionsAnswered);
+        }
 
-        int highestNumCorrect = allRuns.max("numCorrect").intValue();
-        RealmResults<RunDO> topRuns = allRuns.where().equalTo("numCorrect", highestNumCorrect).findAll();
-        topRuns.sort("numWrong");
-        statsBundle.setBestRun(topRuns.first());
+        if (!allRuns.isEmpty()) {
+            int highestNumCorrect = allRuns.max("numCorrect").intValue();
+            RealmResults<RunDO> topRuns = allRuns.where().equalTo("numCorrect", highestNumCorrect).findAll();
+            topRuns.sort("numWrong");
+            statsBundle.setBestRun(topRuns.first());
 
-        int lowestNumCorrect = allRuns.min("numCorrect").intValue();
-        RealmResults<RunDO> worstRuns = allRuns.where().equalTo("numCorrect", lowestNumCorrect).findAll();
-        worstRuns.sort("numWrong", Sort.DESCENDING);
-        statsBundle.setWorstRun(worstRuns.first());
+            int lowestNumCorrect = allRuns.min("numCorrect").intValue();
+            RealmResults<RunDO> worstRuns = allRuns.where().equalTo("numCorrect", lowestNumCorrect).findAll();
+            worstRuns.sort("numWrong", Sort.DESCENDING);
+            statsBundle.setWorstRun(worstRuns.first());
+        }
 
         return statsBundle;
     }

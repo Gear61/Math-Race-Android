@@ -66,7 +66,7 @@ public class StatsBundle {
     }
 
     public RunDO getBestRun() {
-        return bestRun;
+        return bestRun != null ? bestRun : new RunDO();
     }
 
     public void setBestRun(RunDO bestRun) {
@@ -74,7 +74,7 @@ public class StatsBundle {
     }
 
     public RunDO getWorstRun() {
-        return worstRun;
+        return worstRun != null ? worstRun : new RunDO();
     }
 
     public void setWorstRun(RunDO worstRun) {
