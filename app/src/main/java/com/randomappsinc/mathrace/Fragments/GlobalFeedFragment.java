@@ -147,7 +147,7 @@ public class GlobalFeedFragment extends Fragment
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        final int bottomIndexSeen = firstVisibleItem + visibleItemCount;
+        int bottomIndexSeen = firstVisibleItem + visibleItemCount;
 
         // If visible last item's position is the size of the list, then we've hit the bottom
         if (globalFeedAdapter.getExtraItem() == 1 && bottomIndexSeen == totalItemCount) {

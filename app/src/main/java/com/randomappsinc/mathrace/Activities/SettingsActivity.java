@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.randomappsinc.mathrace.Adapters.FontAwesomeAdapter;
@@ -21,8 +20,9 @@ import butterknife.OnItemClick;
  */
 public class SettingsActivity extends StandardActivity {
     public static final String SUPPORT_EMAIL = "chessnone@gmail.com";
+    public static final String OTHER_APPS_URL = "https://play.google.com/store/apps/dev?id=9093438553713389916";
 
-    @Bind(R.id.coordinator_layout) View parent;
+    @Bind(R.id.parent) View parent;
     @Bind(R.id.settings_options) ListView settingsOptions;
     @BindString(R.string.play_store_error) String playStoreError;
     @BindString(R.string.feedback_subject) String feedbackSubject;
@@ -41,7 +41,7 @@ public class SettingsActivity extends StandardActivity {
     }
 
     @OnItemClick(R.id.settings_options)
-    public void onItemClick(AdapterView<?> adapterView, View view, final int position, long id) {
+    public void onItemClick(int position) {
         Intent intent = null;
         switch (position) {
             case 0:
@@ -55,6 +55,9 @@ public class SettingsActivity extends StandardActivity {
                 startActivity(Intent.createChooser(sendIntent, sendEmail));
                 return;
             case 2:
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(OTHER_APPS_URL));
+                break;
+            case 3:
                 Uri uri =  Uri.parse("market://details?id=" + getApplicationContext().getPackageName());
                 intent = new Intent(Intent.ACTION_VIEW, uri);
                 if (!(getPackageManager().queryIntentActivities(intent, 0).size() > 0)) {

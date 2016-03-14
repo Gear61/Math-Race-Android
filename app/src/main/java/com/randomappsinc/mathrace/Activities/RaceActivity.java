@@ -81,7 +81,7 @@ public class RaceActivity extends StandardActivity {
     }
 
     @OnClick(R.id.start_race)
-    public void startRace(View view) {
+    public void startRace() {
         startFreshRace();
     }
 
@@ -126,7 +126,7 @@ public class RaceActivity extends StandardActivity {
     }
 
     @OnEditorAction(R.id.answer)
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+    public boolean onEditorAction(int actionId, KeyEvent event) {
         if ((actionId == EditorInfo.IME_NULL && event.getAction() == KeyEvent.ACTION_DOWN)
                 || (actionId == EditorInfo.IME_ACTION_DONE)) {
             processAnswer();
@@ -148,7 +148,7 @@ public class RaceActivity extends StandardActivity {
     }
 
     @OnClick(R.id.submit_run)
-    public void submitRun(View view) {
+    public void submitRun() {
         Intent intent = new Intent(this, EvaluationActivity.class);
         RunStory run = new RunStory(PreferencesManager.get().getUserTag(), numCorrect, numWrong, runType);
         intent.putExtra(Constants.RUN_KEY, run);
@@ -158,23 +158,9 @@ public class RaceActivity extends StandardActivity {
     }
 
     @OnClick(R.id.retry)
-    public void retry(View view) {
+    public void retry() {
         raceLayout.setVisibility(View.GONE);
         startRace.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.race_menu, menu);
-        menu.findItem(R.id.pick_race).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_list)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
-        menu.findItem(R.id.start_new_race).setIcon(
-                new IconDrawable(this, FontAwesomeIcons.fa_refresh)
-                        .colorRes(R.color.white)
-                        .actionBarSize());
-        return true;
     }
 
     public void resetRace() {
@@ -202,6 +188,20 @@ public class RaceActivity extends StandardActivity {
                 .positiveText(R.string.choose)
                 .negativeText(android.R.string.no)
                 .show();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.race_menu, menu);
+        menu.findItem(R.id.pick_race).setIcon(
+                new IconDrawable(this, FontAwesomeIcons.fa_list)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        menu.findItem(R.id.start_new_race).setIcon(
+                new IconDrawable(this, FontAwesomeIcons.fa_refresh)
+                        .colorRes(R.color.white)
+                        .actionBarSize());
+        return true;
     }
 
     @Override

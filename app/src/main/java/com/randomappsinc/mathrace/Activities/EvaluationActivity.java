@@ -59,7 +59,7 @@ public class EvaluationActivity extends StandardActivity {
     }
 
     @OnClick(R.id.try_again)
-    public void tryAgain(View view) {
+    public void tryAgain() {
         finish();
     }
 }

@@ -35,7 +35,7 @@ public class ChooseUserTagActivity extends StandardActivity {
     }
 
     @OnClick(R.id.submit)
-    public void submitTag(View view) {
+    public void submitTag() {
         FormUtils.hideKeyboard(this);
         String newTag = userTag.getText().toString();
         if (newTag.trim().isEmpty()) {
