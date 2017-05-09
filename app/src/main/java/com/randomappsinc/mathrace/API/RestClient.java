@@ -1,7 +1,7 @@
 package com.randomappsinc.mathrace.API;
 
-import retrofit.GsonConverterFactory;
-import retrofit.Retrofit;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by alexanderchiou on 12/7/15.

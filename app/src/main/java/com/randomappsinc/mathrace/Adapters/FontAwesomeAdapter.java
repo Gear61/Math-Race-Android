@@ -42,7 +42,7 @@ public class FontAwesomeAdapter extends BaseAdapter {
         FontAwesomeViewHolder holder;
         if (view == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = vi.inflate(R.layout.font_awesome_list_item, parent, false);
+            view = vi.inflate(R.layout.list_item_with_icon, parent, false);
             holder = new FontAwesomeViewHolder(view);
             view.setTag(holder);
         }

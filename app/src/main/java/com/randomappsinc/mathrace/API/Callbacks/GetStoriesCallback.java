@@ -8,9 +8,9 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by alexanderchiou on 12/7/15.
@@ -23,7 +23,7 @@ public class GetStoriesCallback implements Callback<List<RunStory>> {
     }
 
     @Override
-    public void onResponse(Response<List<RunStory>> response, Retrofit retrofit) {
+    public void onResponse(Call<List<RunStory>> call, Response<List<RunStory>> response) {
         if (response.code() == ApiConstants.HTTP_STATUS_OK) {
             EventBus.getDefault().post(new StoriesEvent(mode, response.body()));
         } else {
@@ -32,7 +32,7 @@ public class GetStoriesCallback implements Callback<List<RunStory>> {
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure(Call<List<RunStory>> call, Throwable t) {
         EventBus.getDefault().post(new StoriesEvent(mode, null));
     }
 }

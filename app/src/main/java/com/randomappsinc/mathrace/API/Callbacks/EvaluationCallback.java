@@ -9,9 +9,9 @@ import com.randomappsinc.mathrace.Persistence.Database.RunDO;
 
 import org.greenrobot.eventbus.EventBus;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by alexanderchiou on 12/10/15.
@@ -24,7 +24,7 @@ public class EvaluationCallback implements Callback<Evaluation> {
     }
 
     @Override
-    public void onResponse(Response<Evaluation> response, Retrofit retrofit) {
+    public void onResponse(Call<Evaluation> call, Response<Evaluation> response) {
         if (response.code() == ApiConstants.HTTP_STATUS_OK) {
             EventBus.getDefault().post(new EvaluationEvent(response.body()));
             RunDO runDO = new RunDO();
@@ -42,7 +42,7 @@ public class EvaluationCallback implements Callback<Evaluation> {
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure(Call<Evaluation> call, Throwable t) {
         EventBus.getDefault().post(new EvaluationEvent(null));
     }
 }
