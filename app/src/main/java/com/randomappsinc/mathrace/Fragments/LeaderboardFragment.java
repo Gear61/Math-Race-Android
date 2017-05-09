@@ -17,9 +17,11 @@ import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
 import com.randomappsinc.mathrace.Utils.FormUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by alexanderchiou on 12/8/15.
@@ -70,6 +72,7 @@ public class LeaderboardFragment extends Fragment implements SwipeRefreshLayout.
         RestClient.getInstance().getMathRaceService().getLeaderboard(runType).enqueue(callback);
     }
 
+    @Subscribe
     public void onEvent(LeaderboardEvent event) {
         if (event.getRunType().equals(runType)) {
             loadingLeaderboard.setVisibility(View.GONE);

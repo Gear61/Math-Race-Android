@@ -4,9 +4,10 @@ import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Models.RunStory;
 import com.randomappsinc.mathrace.Models.Events.StoriesEvent;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -25,8 +26,7 @@ public class GetStoriesCallback implements Callback<List<RunStory>> {
     public void onResponse(Response<List<RunStory>> response, Retrofit retrofit) {
         if (response.code() == ApiConstants.HTTP_STATUS_OK) {
             EventBus.getDefault().post(new StoriesEvent(mode, response.body()));
-        }
-        else {
+        } else {
             EventBus.getDefault().post(new StoriesEvent(mode, null));
         }
     }

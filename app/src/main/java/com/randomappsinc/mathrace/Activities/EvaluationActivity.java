@@ -12,10 +12,12 @@ import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
 import com.randomappsinc.mathrace.Utils.RaceUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by alexanderchiou on 12/10/15.
@@ -39,6 +41,7 @@ public class EvaluationActivity extends StandardActivity {
         RestClient.getInstance().getMathRaceService().addScore(run).enqueue(callback);
     }
 
+    @Subscribe
     public void onEvent(EvaluationEvent event) {
         loading.setVisibility(View.GONE);
         if (event.getEvaluation() != null) {

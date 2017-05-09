@@ -26,10 +26,12 @@ import com.randomappsinc.mathrace.Models.Events.StoriesEvent;
 import com.randomappsinc.mathrace.R;
 import com.randomappsinc.mathrace.Utils.Constants;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by alexanderchiou on 12/5/15.
@@ -95,6 +97,7 @@ public class GlobalFeedFragment extends Fragment
         }
     }
 
+    @Subscribe
     public void onEvent(StoriesEvent event) {
         if (event.getMode().equals(ApiConstants.NEWEST)) {
             loadingStories.setVisibility(View.GONE);

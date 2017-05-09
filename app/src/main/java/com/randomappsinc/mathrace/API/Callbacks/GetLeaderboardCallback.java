@@ -4,9 +4,10 @@ import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Models.LeadingRun;
 import com.randomappsinc.mathrace.Models.Events.LeaderboardEvent;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -25,8 +26,7 @@ public class GetLeaderboardCallback implements Callback<List<LeadingRun>> {
     public void onResponse(Response<List<LeadingRun>> response, Retrofit retrofit) {
         if (response.code() == ApiConstants.HTTP_STATUS_OK) {
             EventBus.getDefault().post(new LeaderboardEvent(runType, response.body()));
-        }
-        else {
+        } else {
             EventBus.getDefault().post(new LeaderboardEvent(runType, null));
         }
     }

@@ -7,7 +7,8 @@ import com.randomappsinc.mathrace.Models.Events.EvaluationEvent;
 import com.randomappsinc.mathrace.Persistence.Database.DatabaseManager;
 import com.randomappsinc.mathrace.Persistence.Database.RunDO;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
+
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -35,8 +36,7 @@ public class EvaluationCallback implements Callback<Evaluation> {
             runDO.setRank(response.body().getNumSuperiorRuns() + 1);
             runDO.setNumTotalRuns(response.body().getNumTotalRuns());
             DatabaseManager.get().addRun(runDO);
-        }
-        else {
+        } else {
             EventBus.getDefault().post(new EvaluationEvent(null));
         }
     }
