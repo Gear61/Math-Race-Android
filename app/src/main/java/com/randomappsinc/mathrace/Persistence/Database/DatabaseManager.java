@@ -1,10 +1,7 @@
 package com.randomappsinc.mathrace.Persistence.Database;
 
-import android.content.Context;
-
 import com.randomappsinc.mathrace.Activities.RaceActivity;
 import com.randomappsinc.mathrace.Models.StatsBundle;
-import com.randomappsinc.mathrace.Utils.MyApplication;
 
 import java.util.List;
 
@@ -35,8 +32,7 @@ public class DatabaseManager {
     private Realm realm;
 
     private DatabaseManager() {
-        Context context = MyApplication.get().getApplicationContext();
-        realm = Realm.getInstance(context);
+        realm = Realm.getDefaultInstance();
     }
 
     public boolean didThisRun(long runId) {
@@ -48,8 +44,7 @@ public class DatabaseManager {
             realm.beginTransaction();
             realm.copyToRealmOrUpdate(run);
             realm.commitTransaction();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             realm.cancelTransaction();
         }
     }
