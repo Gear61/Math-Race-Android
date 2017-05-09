@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
 import com.joanzapata.iconify.IconDrawable;
-import com.joanzapata.iconify.fonts.FontAwesomeIcons;
+import com.joanzapata.iconify.fonts.IoniconsIcons;
 import com.randomappsinc.mathrace.API.ApiConstants;
 import com.randomappsinc.mathrace.API.Callbacks.GetStoriesCallback;
 import com.randomappsinc.mathrace.API.RestClient;
@@ -66,9 +66,9 @@ public class GlobalFeedFragment extends Fragment
         pickRace.getMenuIconView().setImageResource(R.drawable.race_icon);
         pickRace.setIconAnimated(false);
         additionRace.setImageDrawable(new IconDrawable(getActivity(),
-                FontAwesomeIcons.fa_plus).colorRes(R.color.white));
+                IoniconsIcons.ion_plus).colorRes(R.color.white));
         subtractionRace.setImageDrawable(new IconDrawable(getActivity(),
-                FontAwesomeIcons.fa_minus).colorRes(R.color.white));
+                IoniconsIcons.ion_minus).colorRes(R.color.white));
         globalFeedAdapter = new GlobalFeedAdapter(getActivity());
         stories.setAdapter(globalFeedAdapter);
         stories.setOnScrollListener(this);

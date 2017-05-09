@@ -108,8 +108,7 @@ public class GlobalFeedAdapter extends BaseAdapter {
             view = vi.inflate(R.layout.story_cell, parent, false);
             holder = new StoryViewHolder(view);
             view.setTag(holder);
-        }
-        else {
+        } else {
             holder = (StoryViewHolder) view.getTag();
         }
 
@@ -117,8 +116,7 @@ public class GlobalFeedAdapter extends BaseAdapter {
             holder.runData.setVisibility(View.GONE);
             holder.timestamp.setVisibility(View.GONE);
             holder.loadingStories.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             holder.loadingStories.setVisibility(View.GONE);
             holder.runData.setVisibility(View.VISIBLE);
             holder.timestamp.setVisibility(View.VISIBLE);
